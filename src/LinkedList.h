@@ -2,48 +2,36 @@
 #define LINKED_LIST_H
 
 #include <stdexcept>
-
-// ═══════════════════════════════════════════════════════════
-// УЗЕЛ СПИСКА (Node)
-// ═══════════════════════════════════════════════════════════
-
+//T - любой тип чтобы не писать одно и то же для разных типов данных
+//снаружи пользователь видит одинаковый интерфейс также есть одинаковый вызов но разная реализация функций
 template <class T>
 class Node {
 public:
-    T data;           // Данные узла
-    Node<T>* next;    // Указатель на следующий узел
+    T data;  //данные узла
+    Node<T>* next;//указатель на следующий узел
 
-    // Конструктор
     Node(T data, Node<T>* next = nullptr) {
         this->data = data;
         this->next = next;
     }
 };
 
-// ═══════════════════════════════════════════════════════════
-// СВЯЗНЫЙ СПИСОК (LinkedList)
-// ═══════════════════════════════════════════════════════════
-
 template <class T>
 class LinkedList {
 private:
-    Node<T>* head;  // Указатель на первый узел
-    Node<T>* tail;  // Указатель на последний узел
-    int length;     // Количество элементов
+    Node<T>* head;//указатель на первый узел
+    Node<T>* tail; //указатель на последний узел
+    int length; //количество элементов
 
 public:
-    // ═══════════════════════════════════════════════════════
-    // КОНСТРУКТОРЫ
-    // ═══════════════════════════════════════════════════════
-
-    // Создать пустой список
+    //создать пустой список
     LinkedList() {
         this->head = nullptr;
         this->tail = nullptr;
         this->length = 0;
     }
 
-    // Создать из массива
+    //создать из массива
     LinkedList(T* items, int count) {
         if (count < 0) {
             throw std::invalid_argument("Count cannot be negative");
@@ -55,20 +43,16 @@ public:
         this->head = nullptr;
         this->tail = nullptr;
         this->length = 0;
-
-        // Добавляем элементы по одному
         for (int i = 0; i < count; i++) {
             Append(items[i]);
         }
     }
 
-    // Копирующий конструктор
+    //копирующий конструктор
     LinkedList(const LinkedList<T>& other) {
         this->head = nullptr;
         this->tail = nullptr;
         this->length = 0;
-
-        // Копируем все элементы
         Node<T>* current = other.head;
         while (current != nullptr) {
             Append(current->data);
@@ -76,12 +60,7 @@ public:
         }
     }
 
-    // ═══════════════════════════════════════════════════════
-    // ДЕСТРУКТОР
-    // ═══════════════════════════════════════════════════════
-
     ~LinkedList() {
-        // Удаляем все узлы
         Node<T>* current = this->head;
         while (current != nullptr) {
             Node<T>* next = current->next;
@@ -89,12 +68,7 @@ public:
             current = next;
         }
     }
-
-    // ═══════════════════════════════════════════════════════
-    // ПОЛУЧЕНИЕ ДАННЫХ
-    // ═══════════════════════════════════════════════════════
-
-    // Получить первый элемент
+    //получить первый элемент
     T GetFirst() const {
         if (this->length == 0) {
             throw std::out_of_range("List is empty");
@@ -102,7 +76,7 @@ public:
         return this->head->data;
     }
 
-    // Получить последний элемент
+    //получить последний элемент
     T GetLast() const {
         if (this->length == 0) {
             throw std::out_of_range("List is empty");
@@ -110,22 +84,19 @@ public:
         return this->tail->data;
     }
 
-    // Получить элемент по индексу
+    //получить элемент по индексу
     T Get(int index) const {
         if (index < 0 || index >= this->length) {
             throw std::out_of_range("Index out of range");
         }
-
-        // Идём по списку до нужного индекса
         Node<T>* current = this->head;
         for (int i = 0; i < index; i++) {
             current = current->next;
         }
-
         return current->data;
     }
 
-    // Получить подсписок (от startIndex до endIndex включительно)
+    //получить подсписок (от startIndex до endIndex включительно)
     LinkedList<T>* GetSubList(int startIndex, int endIndex) const {
         // Проверки
         if (startIndex < 0 || startIndex >= this->length) {
@@ -140,13 +111,12 @@ public:
 
         LinkedList<T>* subList = new LinkedList<T>();
 
-        // Идём до startIndex
+        //идём до startIndex
         Node<T>* current = this->head;
         for (int i = 0; i < startIndex; i++) {
             current = current->next;
         }
-
-        // Копируем элементы от startIndex до endIndex
+        //копируем элементы от startIndex до endIndex
         for (int i = startIndex; i <= endIndex; i++) {
             subList->Append(current->data);
             current = current->next;
@@ -154,26 +124,21 @@ public:
 
         return subList;
     }
-
-    // Получить длину списка
+    //получить длину списка
     int GetLength() const {
         return this->length;
     }
 
-    // ═══════════════════════════════════════════════════════
-    // ИЗМЕНЕНИЕ ДАННЫХ
-    // ═══════════════════════════════════════════════════════
-
-    // Добавить элемент в конец
+    //добавить элемент в конец
     void Append(T item) {
         Node<T>* newNode = new Node<T>(item);
 
         if (this->length == 0) {
-            // Список пуст - новый узел и первый, и последний
+            //список пуст - новый узел и первый, и последний
             this->head = newNode;
             this->tail = newNode;
         } else {
-            // Добавляем в конец
+            //добавляем в конец
             this->tail->next = newNode;
             this->tail = newNode;
         }
@@ -181,30 +146,28 @@ public:
         this->length++;
     }
 
-    // Добавить элемент в начало
+    //добавить элемент в начало
     void Prepend(T item) {
         Node<T>* newNode = new Node<T>(item, this->head);
 
         if (this->length == 0) {
-            // Список пуст
+            //список пуст
             this->head = newNode;
             this->tail = newNode;
         } else {
-            // Новый узел становится первым
+            //новый узел становится первым
             this->head = newNode;
         }
-
         this->length++;
     }
 
-    // Вставить элемент на позицию index
+    //вставить элемент на позицию index
     void InsertAt(T item, int index) {
-        // Проверки
+        //проверки
         if (index < 0 || index > this->length) {
             throw std::out_of_range("Index out of range");
         }
-
-        // Частные случаи
+        //частные случаи
         if (index == 0) {
             Prepend(item);
             return;
@@ -214,7 +177,6 @@ public:
             Append(item);
             return;
         }
-
         // Общий случай: вставка в середину
         // Идём до узла ПЕРЕД позицией вставки
         Node<T>* current = this->head;
@@ -229,18 +191,16 @@ public:
         this->length++;
     }
 
-    // Объединить два списка (concat)
+    //объединить два списка
     LinkedList<T>* Concat(LinkedList<T>* other) const {
         LinkedList<T>* result = new LinkedList<T>();
-
-        // Копируем элементы из текущего списка
+        //копируем элементы из текущего списка
         Node<T>* current = this->head;
         while (current != nullptr) {
             result->Append(current->data);
             current = current->next;
         }
-
-        // Копируем элементы из другого списка
+        //копируем элементы из другого списка
         current = other->head;
         while (current != nullptr) {
             result->Append(current->data);
@@ -251,4 +211,4 @@ public:
     }
 };
 
-#endif // LINKED_LIST_H
+#endif

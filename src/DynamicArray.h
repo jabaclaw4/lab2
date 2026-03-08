@@ -6,9 +6,9 @@
 template <class T>
 class DynamicArray {
 private:
-    T* data;        // Указатель на массив данных
-    int size;       // Текущий размер массива
-    int capacity;   // Выделенная память (capacity >= size)
+    T* data;//указатель на массив данных
+    int size;//текущий размер массива
+    int capacity;//выделенная память (capacity >= size)
 
 public:
     DynamicArray(int size = 0) {//массив заданного размера
@@ -121,10 +121,8 @@ public:
             this->capacity = 0;
             return;
         }
-
         //создаём новый массив
         T* newData = new T[newSize];
-
         //копируем данные (сколько поместится)
         int elementsToCopy = (newSize < this->size) ? newSize : this->size;
         for (int i = 0; i < elementsToCopy; i++) {
@@ -132,7 +130,7 @@ public:
         }
         //если увеличили размер, инициализируем новые элементы
         for (int i = this->size; i < newSize; i++) {
-            newData[i] = T();  // Конструктор по умолчанию
+            newData[i] = T();//конструктор по умолчанию
         }
         //удаляем старые данные
         if (this->data != nullptr) {
