@@ -100,7 +100,7 @@ public:
         //записываем элемент в начало
         this->items->Set(0, item);
     }
-
+//вставить элемент на index
     void InsertAt(T item, int index) override {
         int size = this->items->GetSize();
         if (index < 0 || index > size) {
@@ -129,7 +129,7 @@ public:
         //записываем элемент
         this->items->Set(index, item);
     }
-
+//объединить две последовательности
     Sequence<T>* Concat(Sequence<T>* other) const override {
         //создаём новую последовательность
         int newSize = this->GetLength() + other->GetLength();

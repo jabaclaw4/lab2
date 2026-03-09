@@ -1,60 +1,104 @@
-#include "../src/DynamicArray.h"
 #include <iostream>
+#include "../src/DynamicArray.h"
+
 using namespace std;
 
-int main() {
-    cout << "=== Тест DynamicArray ===" << endl;
+int total = 0;
+int passed = 0;
 
-    // Тест 1: Создание пустого массива
-    DynamicArray<int>* arr1 = new DynamicArray<int>(0);
-    cout << "Пустой массив, size = " << arr1->GetSize() << endl;  // 0
-
-    // Тест 2: Создание массива с размером
-    DynamicArray<int>* arr2 = new DynamicArray<int>(5);
-    cout << "Массив из 5 элементов, size = " << arr2->GetSize() << endl;  // 5
-
-    // Тест 3: Set и Get
-    arr2->Set(0, 10);
-    arr2->Set(1, 20);
-    arr2->Set(2, 30);
-    cout << "arr2[0] = " << arr2->Get(0) << endl;  // 10
-    cout << "arr2[1] = " << arr2->Get(1) << endl;  // 20
-    cout << "arr2[2] = " << arr2->Get(2) << endl;  // 30
-
-    // Тест 4: Resize (увеличение)
-    arr2->Resize(7);
-    cout << "После Resize(7), size = " << arr2->GetSize() << endl;  // 7
-    cout << "arr2[0] = " << arr2->Get(0) << endl;  // 10 (сохранился)
-    cout << "arr2[5] = " << arr2->Get(5) << endl;  // 0 (новый элемент)
-
-    // Тест 5: Resize (уменьшение)
-    arr2->Resize(2);
-    cout << "После Resize(2), size = " << arr2->GetSize() << endl;  // 2
-    cout << "arr2[0] = " << arr2->Get(0) << endl;  // 10 (сохранился)
-
-    // Тест 6: Создание из массива
-    int numbers[] = {100, 200, 300};
-    DynamicArray<int>* arr3 = new DynamicArray<int>(numbers, 3);
-    cout << "Массив из {100,200,300}, arr3[1] = " << arr3->Get(1) << endl;  // 200
-
-    // Тест 7: Копирующий конструктор
-    DynamicArray<int>* arr4 = new DynamicArray<int>(*arr3);
-    cout << "Копия arr3, arr4[1] = " << arr4->Get(1) << endl;  // 200
-
-    // Тест 8: Проверка исключений
-    try {
-        arr2->Get(100);  // Индекс за пределами
-    } catch (const std::out_of_range& e) {
-        cout << "Поймали исключение: " << e.what() << endl;
+void check(bool condition, const char* name) {
+    total++;
+    if (condition) {
+        passed++;
+        cout << "OK";
+    } else {
+        cout << "FAIL";
     }
+    cout << " - " << name << endl;
+}
 
-    // Освобождаем память
+int main() {
+    cout << "=== тесты DynamicArray ===" << endl;
+
+    //граничные значения
+    DynamicArray<int>* arr1 = new DynamicArray<int>(0);
+    check(arr1->GetSize() == 0, "размер 0");
     delete arr1;
+
+    DynamicArray<int>* arr2 = new DynamicArray<int>(1);
+    check(arr2->GetSize() == 1, "размер 1");
     delete arr2;
+
+    DynamicArray<int>* arr3 = new DynamicArray<int>(10000);
+    check(arr3->GetSize() == 10000, "большой размер");
     delete arr3;
+
+    //экстремальные значения
+    int extreme[] = {-2147483648, 0, 2147483647};  //int_min, 0, int_max
+    DynamicArray<int>* arr4 = new DynamicArray<int>(extreme, 3);
+    check(arr4->Get(0) == -2147483648, "int_min");
+    check(arr4->Get(1) == 0, "ноль");
+    check(arr4->Get(2) == 2147483647, "int_max");
     delete arr4;
 
-    cout << "=== Все тесты пройдены! ===" << endl;
+    //set/get
+    DynamicArray<int>* arr5 = new DynamicArray<int>(5);
+    arr5->Set(0, 100);
+    arr5->Set(4, 500);
+    check(arr5->Get(0) == 100, "set/get первый");
+    check(arr5->Get(4) == 500, "set/get последний");
+    delete arr5;
 
-    return 0;
+    //resize вверх
+    int data[] = {1, 2, 3};
+    DynamicArray<int>* arr6 = new DynamicArray<int>(data, 3);
+    arr6->Resize(5);
+    check(arr6->GetSize() == 5, "resize вверх: размер");
+    check(arr6->Get(0) == 1, "resize вверх: данные сохранены");
+    check(arr6->Get(2) == 3, "resize вверх: последний старый");
+    delete arr6;
+
+    //resize вниз
+    DynamicArray<int>* arr7 = new DynamicArray<int>(data, 3);
+    arr7->Resize(1);
+    check(arr7->GetSize() == 1, "resize вниз: размер");
+    check(arr7->Get(0) == 1, "resize вниз: данные сохранены");
+    delete arr7;
+
+    //resize в 0
+    DynamicArray<int>* arr8 = new DynamicArray<int>(data, 3);
+    arr8->Resize(0);
+    check(arr8->GetSize() == 0, "resize в 0");
+    delete arr8;
+
+    //копирование
+    DynamicArray<int>* arr9 = new DynamicArray<int>(data, 3);
+    DynamicArray<int>* arr10 = new DynamicArray<int>(*arr9);
+    check(arr10->GetSize() == 3, "копирование: размер");
+    check(arr10->Get(0) == 1, "копирование: данные");
+    arr9->Set(0, 999);
+    check(arr10->Get(0) == 1, "копирование: независимость");
+    delete arr9;
+    delete arr10;
+
+    //исключения
+    bool caught = false;
+    try {
+        DynamicArray<int>* arr11 = new DynamicArray<int>(3);
+        arr11->Get(5);
+    } catch (...) {
+        caught = true;
+    }
+    check(caught, "исключение: выход за границы");
+
+    caught = false;
+    try {
+        DynamicArray<int>* arr12 = new DynamicArray<int>(-1);
+    } catch (...) {
+        caught = true;
+    }
+    check(caught, "исключение: отрицательный размер");
+
+    cout << "\nитог: " << passed << " / " << total << " OK" << endl;
+    return (passed == total) ? 0 : 1;
 }

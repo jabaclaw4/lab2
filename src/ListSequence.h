@@ -78,7 +78,6 @@ public:
         for (int i = 0; i < this->GetLength(); i++) {
             result->Append(this->Get(i));
         }
-
         //копируем элементы из другой последовательности
         for (int i = 0; i < other->GetLength(); i++) {
             result->Append(other->Get(i));
