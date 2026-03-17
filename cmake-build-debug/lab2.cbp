@@ -85,6 +85,9 @@
 		<Unit filename="C:/Users/User/CLionProjects/lab2/main.cpp">
 			<Option target="lab2"/>
 		</Unit>
+		<Unit filename="C:/Users/User/CLionProjects/lab2/tests/test_operators.cpp">
+			<Option target="lab2"/>
+		</Unit>
 		<Unit filename="C:/Users/User/CLionProjects/lab2/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

@@ -152,6 +152,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+tests/test_operators.obj: tests/test_operators.cpp.obj
+.PHONY : tests/test_operators.obj
+
+# target to build an object file
+tests/test_operators.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_operators.cpp.obj
+.PHONY : tests/test_operators.cpp.obj
+
+tests/test_operators.i: tests/test_operators.cpp.i
+.PHONY : tests/test_operators.i
+
+# target to preprocess a source file
+tests/test_operators.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_operators.cpp.i
+.PHONY : tests/test_operators.cpp.i
+
+tests/test_operators.s: tests/test_operators.cpp.s
+.PHONY : tests/test_operators.s
+
+# target to generate assembly for a file
+tests/test_operators.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_operators.cpp.s
+.PHONY : tests/test_operators.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -164,6 +188,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... tests/test_operators.obj
+	@echo ... tests/test_operators.i
+	@echo ... tests/test_operators.s
 .PHONY : help
 
 
