@@ -1,6 +1,5 @@
 #ifndef SEQUENCE_H
 #define SEQUENCE_H
-
 #include <stdexcept>
 //virtual = "эта функция может работать по-разному в зависимости от реального типа объекта"
 //Компилятор смотрит на реальный объект, а не на тип переменной
@@ -12,32 +11,67 @@ template <class T>
 class Sequence {
 public:
     virtual ~Sequence() {}
-    //получить первый элемент
+
+    //существующие методы (чтение)
     virtual T GetFirst() const = 0;
-
-    //получить последний элемент
     virtual T GetLast() const = 0;
-
-    //получить элемент по индексу
     virtual T Get(int index) const = 0;
-
-    //получить подпоследовательность
+    virtual int GetLength() const = 0;
     virtual Sequence<T>* GetSubsequence(int startIndex, int endIndex) const = 0;
 
-    //получить длину
-    virtual int GetLength() const = 0;
-
-    //добавить элемент в конец
+    //существующие методы (изменение)
     virtual void Append(T item) = 0;
-
-    //дообавить элемент в начало
     virtual void Prepend(T item) = 0;
-
-    //вставить элемент на позицию
     virtual void InsertAt(T item, int index) = 0;
-
-    //объединить последовательности
     virtual Sequence<T>* Concat(Sequence<T>* other) const = 0;
+
+    //новые методы с Option (Try-семантика)
+
+    //попытка получить первый элемент (без исключения если пусто)
+    virtual Option<T> TryGetFirst() const {
+        if (this->GetLength() == 0) {
+            return Option<T>::None();
+        }
+        return Option<T>::Some(this->GetFirst());
+    }
+
+    //попытка получить последний элемент
+    virtual Option<T> TryGetLast() const {
+        if (this->GetLength() == 0) {
+            return Option<T>::None();
+        }
+        return Option<T>::Some(this->GetLast());
+    }
+
+    //попытка получить элемент по индексу
+    virtual Option<T> TryGet(int index) const {
+        if (index < 0 || index >= this->GetLength()) {
+            return Option<T>::None();
+        }
+        return Option<T>::Some(this->Get(index));
+    }
+
+    //найти первый элемент, удовлетворяющий условию
+    virtual Option<T> TryFind(bool (*predicate)(T)) const {
+        for (int i = 0; i < this->GetLength(); i++) {
+            T item = this->Get(i);
+            if (predicate(item)) {
+                return Option<T>::Some(item);
+            }
+        }
+        return Option<T>::None();
+    }
+
+    //найти индекс первого элемента, удовлетворяющего условию
+    virtual Option<int> TryFindIndex(bool (*predicate)(T)) const {
+        for (int i = 0; i < this->GetLength(); i++) {
+            if (predicate(this->Get(i))) {
+                return Option<int>::Some(i);
+            }
+        }
+        return Option<int>::None();
+    }
+
 };
 
 #endif
