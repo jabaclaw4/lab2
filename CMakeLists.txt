@@ -5,4 +5,5 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(lab2 main.cpp
         tests/test_operators.cpp
+        tests/run_all_tests.cpp
 )

@@ -10,7 +10,7 @@ int test_mutable_list_main();
 int test_operators_main();
 int test_result_info_main();
 
-int main() {
+int run_all_tests() {
     cout << "  RUNNING ALL TESTS FOR LAB 2" << endl;
     int failed = 0;
     cout << "\n[1/6] Running DynamicArray tests..." << endl;

@@ -1,0 +1,6 @@
+# ninja log v6
+20	847	7955333080499416	CMakeFiles/lab2.dir/tests/test_operators.cpp.obj	86093e79e805ad97
+6	876	7955333080358375	CMakeFiles/lab2.dir/main.cpp.obj	a06e6df6f43f0759
+2	305	7955336975460731	build.ninja	90ca5052432c5a33
+23	366	7955335996687662	CMakeFiles/lab2.dir/tests/run_all_tests.cpp.obj	d160793a590265a
+35	403	7955337001825419	CMakeFiles/lab2.dir/main.cpp.obj	a06e6df6f43f0759
