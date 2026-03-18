@@ -5,6 +5,8 @@
 #include <stdexcept>
 
 //класс Bit - абстракция для одного бита
+//реализуется для экономии памяти
+
 class Bit {
 private:
     bool value;
@@ -19,38 +21,35 @@ public:
     bool GetValue() const {
         return this->value;
     }
-
     //установить значение
     void SetValue(bool val) {
         this->value = val;
     }
-
     //преобразование в bool
     operator bool() const {
         return this->value;
     }
-
     //операторы сравнения
     bool operator==(const Bit& other) const {
         return this->value == other.value;
     }
-
     bool operator!=(const Bit& other) const {
         return this->value != other.value;
     }
 };
 
 //класс BitSequence - последовательность битов
+
 class BitSequence : public Sequence<Bit> {
 private:
-    unsigned char* data;  //массив байтов (каждый байт = 8 бит)
-    int bitCount;         //количество бит
-    int byteCount;        //количество байтов (bitCount/8 округление вверх)
+    unsigned char* data;//массив байтов (каждый байт = 8 бит)
+    int bitCount; //количество бит
+    int byteCount;//количество байтов (bitCount/8 округление вверх)
 
     //вспомогательная функция: получить индекс байта и бита внутри байта
     void GetByteAndBitIndex(int bitIndex, int& byteIndex, int& bitInByte) const {
-        byteIndex = bitIndex / 8;      //номер байта
-        bitInByte = bitIndex % 8;      //номер бита внутри байта (0-7)
+        byteIndex = bitIndex / 8;//номер байта
+        bitInByte = bitIndex % 8;//номер бита внутри байта (0-7)
     }
 
     //получить бит по индексу (внутренняя функция)
@@ -93,7 +92,6 @@ public:
 
         this->bitCount = length;
         this->byteCount = (length + 7) / 8;  //округление вверх
-
         //выделяем память и инициализируем нулями
         this->data = new unsigned char[this->byteCount];
         for (int i = 0; i < this->byteCount; i++) {
@@ -177,15 +175,12 @@ public:
         for (int i = this->byteCount; i < newByteCount; i++) {
             newData[i] = 0;
         }
-
         //освобождаем старую память
         delete[] this->data;
-
         //обновляем поля
         this->data = newData;
         this->bitCount = newBitCount;
         this->byteCount = newByteCount;
-
         //устанавливаем новый бит
         SetBitInternal(this->bitCount - 1, item.GetValue());
     }
@@ -193,7 +188,6 @@ public:
     void Prepend(Bit item) override {
         //создаём новую последовательность
         BitSequence* newSeq = new BitSequence(this->bitCount + 1);
-
         //устанавливаем первый бит
         newSeq->SetBitInternal(0, item.GetValue());
 
@@ -201,7 +195,6 @@ public:
         for (int i = 0; i < this->bitCount; i++) {
             newSeq->SetBitInternal(i + 1, GetBitInternal(i));
         }
-
         //подменяем данные
         delete[] this->data;
         this->data = newSeq->data;
@@ -216,12 +209,10 @@ public:
         if (index < 0 || index > this->bitCount) {
             throw std::out_of_range("index out of range");
         }
-
         if (index == 0) {
             Prepend(item);
             return;
         }
-
         if (index == this->bitCount) {
             Append(item);
             return;
@@ -234,10 +225,8 @@ public:
         for (int i = 0; i < index; i++) {
             newSeq->SetBitInternal(i, GetBitInternal(i));
         }
-
         //вставляем новый бит
         newSeq->SetBitInternal(index, item.GetValue());
-
         //копируем биты после index
         for (int i = index; i < this->bitCount; i++) {
             newSeq->SetBitInternal(i + 1, GetBitInternal(i));
@@ -263,21 +252,17 @@ public:
         if (startIndex > endIndex) {
             throw std::invalid_argument("start index > end index");
         }
-
         int newLength = endIndex - startIndex + 1;
         BitSequence* result = new BitSequence(newLength);
-
         for (int i = 0; i < newLength; i++) {
             result->SetBitInternal(i, GetBitInternal(startIndex + i));
         }
-
         return result;
     }
 
     Sequence<Bit>* Concat(Sequence<Bit>* other) const override {
         int newLength = this->bitCount + other->GetLength();
         BitSequence* result = new BitSequence(newLength);
-
         //копируем биты из текущей последовательности
         for (int i = 0; i < this->bitCount; i++) {
             result->SetBitInternal(i, GetBitInternal(i));
@@ -291,8 +276,7 @@ public:
         return result;
     }
 
-    //побитовые операции (специфичные для BitSequence)
-
+    //побитовые операции
     //побитовое AND
     BitSequence* BitwiseAnd(const BitSequence& other) const {
         if (this->bitCount != other.bitCount) {

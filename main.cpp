@@ -7,11 +7,7 @@
 
 using namespace std;
 
-//===== ГЛОБАЛЬНАЯ ПЕРЕМЕННАЯ =====
-
 Sequence<int>* g_seq = nullptr;
-
-//===== МЕНЮ =====
 
 void print_menu() {
     cout << "\n===== MENU =====" << endl;

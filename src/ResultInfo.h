@@ -7,17 +7,15 @@
 template <class T>
 class ResultInfo {
 private:
-    bool isSuccess;              //успех или ошибка
-    T value;                     //значение если успех
-    const char* errorMessage;    //сообщение если ошибка
+    bool isSuccess;//успех или ошибка
+    T value;//значение если успех
+    const char* errorMessage;//сообщение если ошибка
 
-    //приватный конструктор (используем статические фабрики)
+    //приватный конструктор чтобы можно было создавать без ошибок
     ResultInfo(bool success, T val, const char* error)
             : isSuccess(success), value(val), errorMessage(error) {}
 
 public:
-    //===== СОЗДАНИЕ =====
-
     //создать успешный результат
     static ResultInfo<T> Success(T val) {
         return ResultInfo<T>(true, val, nullptr);
@@ -28,8 +26,6 @@ public:
         return ResultInfo<T>(false, T(), error);
     }
 
-    //===== ПРОВЕРКА =====
-
     bool IsSuccess() const {
         return isSuccess;
     }
@@ -37,8 +33,6 @@ public:
     bool IsFailure() const {
         return !isSuccess;
     }
-
-    //===== ПОЛУЧЕНИЕ ЗНАЧЕНИЯ =====
 
     //получить значение (бросает исключение если ошибка)
     T GetValue() const {
@@ -114,7 +108,7 @@ public:
 
     //===== ДОПОЛНИТЕЛЬНЫЕ УДОБСТВА =====
 
-    //оператор bool для if (result)
+    //оператор bool для if (result) чтобы использовать ResultInfo с if
     explicit operator bool() const {
         return isSuccess;
     }

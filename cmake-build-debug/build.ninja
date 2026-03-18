@@ -57,6 +57,14 @@ build CMakeFiles/lab2.dir/main.cpp.obj: CXX_COMPILER__lab2_unscanned_Debug C$:/U
   TARGET_COMPILE_PDB = CMakeFiles\lab2.dir\
   TARGET_PDB = lab2.pdb
 
+build CMakeFiles/lab2.dir/tests/test_operators.cpp.obj: CXX_COMPILER__lab2_unscanned_Debug C$:/Users/jabaclaw4/CLionProjects/lab2/tests/test_operators.cpp || cmake_object_order_depends_target_lab2
+  DEP_FILE = CMakeFiles\lab2.dir\tests\test_operators.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\lab2.dir
+  OBJECT_FILE_DIR = CMakeFiles\lab2.dir\tests
+  TARGET_COMPILE_PDB = CMakeFiles\lab2.dir\
+  TARGET_PDB = lab2.pdb
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target lab2
@@ -65,7 +73,7 @@ build CMakeFiles/lab2.dir/main.cpp.obj: CXX_COMPILER__lab2_unscanned_Debug C$:/U
 #############################################
 # Link the executable lab2.exe
 
-build lab2.exe: CXX_EXECUTABLE_LINKER__lab2_Debug CMakeFiles/lab2.dir/main.cpp.obj
+build lab2.exe: CXX_EXECUTABLE_LINKER__lab2_Debug CMakeFiles/lab2.dir/main.cpp.obj CMakeFiles/lab2.dir/tests/test_operators.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\lab2.dir

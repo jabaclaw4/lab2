@@ -8,20 +8,15 @@
 template <class T>
 class ListSequenceBase : public Sequence<T> {
 protected:
-    LinkedList<T>* items;
-
-    //конструкторы protected - только наследники могут использовать
-
+    LinkedList<T>* items; //конструкторы protected чтобы только наследники могут использовать
     //пустая последовательность
     ListSequenceBase() {
         this->items = new LinkedList<T>();
     }
-
     //создать из массива
     ListSequenceBase(T* items, int count) {
         this->items = new LinkedList<T>(items, count);
     }
-
     //копирующий конструктор
     ListSequenceBase(const ListSequenceBase<T>& other) {
         this->items = new LinkedList<T>(*other.items);

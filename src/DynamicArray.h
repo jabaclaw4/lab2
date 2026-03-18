@@ -2,7 +2,7 @@
 #define DYNAMIC_ARRAY_H
 
 #include <stdexcept>//для исключений
-
+//хранение данных
 template <class T>
 class DynamicArray {
 private:
