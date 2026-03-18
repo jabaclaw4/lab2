@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cstdlib>  //для system()
+#include "src/all_tests.h"
 #include "src/MutableArraySequence.h"
 #include "src/ImmutableArraySequence.h"
 #include "src/MutableListSequence.h"
@@ -54,31 +54,9 @@ void test_operators_demo() {
     delete seq3;
 }
 
-void run_all_tests() {
-    cout << "\n=====================================" << endl;
-    cout << "  RUNNING ALL TESTS..." << endl;
-    cout << "=====================================" << endl;
-
-    //запускаем скомпилированный файл all_tests
-    int result = system("./all_tests");
-
-    if (result != 0) {
-        cout << "\nNote: Make sure 'all_tests' is compiled!" << endl;
-        cout << "Compile with: g++ -std=c++17 all_tests.cpp -o all_tests" << endl;
-    }
-
-    cout << "\nPress Enter to continue...";
-    cin.ignore();
-    cin.get();
-}
-
-//===== MAIN =====
-
 int main() {
     int choice;
-
     cout << "LAB 2 - Sequence Demo" << endl;
-
     while (true) {
         print_menu();
         cin >> choice;
@@ -194,7 +172,5 @@ int main() {
     if (g_seq != nullptr) {
         delete g_seq;
     }
-
-    cout << "Goodbye!" << endl;
     return 0;
 }

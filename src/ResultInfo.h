@@ -51,9 +51,6 @@ public:
     const char* GetError() const {
         return errorMessage;
     }
-
-    //===== МОНАДИЧЕСКИЕ ОПЕРАЦИИ =====
-
     //Map: применить функцию к значению (если успех)
     //T -> U
     template<class U>
@@ -64,7 +61,6 @@ public:
             return ResultInfo<U>::Failure(errorMessage);
         }
     }
-
     //FlatMap: применить функцию, возвращающую ResultInfo
     //T -> ResultInfo<U>
     template<class U>
@@ -75,7 +71,6 @@ public:
             return ResultInfo<U>::Failure(errorMessage);
         }
     }
-
     //Filter: проверить условие
     ResultInfo<T> Filter(bool (*predicate)(T), const char* errorMsg) const {
         if (!isSuccess) {
@@ -87,7 +82,6 @@ public:
             return ResultInfo<T>::Failure(errorMsg);  //условие не выполнено
         }
     }
-
     //Recover: восстановление из ошибки
     ResultInfo<T> Recover(T (*recoveryFunc)(const char*)) const {
         if (isSuccess) {
@@ -105,9 +99,6 @@ public:
             onFailure(errorMessage);
         }
     }
-
-    //===== ДОПОЛНИТЕЛЬНЫЕ УДОБСТВА =====
-
     //оператор bool для if (result) чтобы использовать ResultInfo с if
     explicit operator bool() const {
         return isSuccess;

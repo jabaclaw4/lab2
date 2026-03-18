@@ -11,13 +11,8 @@ int test_operators_main();
 int test_result_info_main();
 
 int main() {
-    cout << "=====================================" << endl;
     cout << "  RUNNING ALL TESTS FOR LAB 2" << endl;
-    cout << "=====================================" << endl;
-
     int failed = 0;
-
-    //запускаем каждый тест
     cout << "\n[1/6] Running DynamicArray tests..." << endl;
     if (test_dynamic_array_main() != 0) failed++;
 
@@ -36,14 +31,11 @@ int main() {
     cout << "\n[6/6] Running ResultInfo tests..." << endl;
     if (test_result_info_main() != 0) failed++;
 
-    //итоги
     cout << "\n=====================================" << endl;
     if (failed == 0) {
         cout << "  ALL TESTS PASSED! ✓" << endl;
     } else {
         cout << "  " << failed << " TEST(S) FAILED! ✗" << endl;
     }
-    cout << "=====================================" << endl;
-
     return failed;
 }
