@@ -18,7 +18,7 @@ void check(bool condition, const char* name) {
     cout << " - " << name << endl;
 }
 
-int test_mutable_list_main() {
+void run_test_mutable_list() {
     cout << "=== тесты MutableListSequence ===" << endl;
 
     //пустая последовательность

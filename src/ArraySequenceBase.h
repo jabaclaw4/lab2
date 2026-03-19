@@ -33,7 +33,7 @@ public:
         delete this->items;
     }
 
-    //методы ЧТЕНИЯ - одинаковые для mutable и immutable
+    //одинаковые для mutable и immutable
     T GetFirst() const override {
         if (this->items->GetSize() == 0) {
             throw std::out_of_range("sequence is empty");

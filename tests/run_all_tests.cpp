@@ -1,41 +1,32 @@
 #include <iostream>
+#include "../src/all_tests.h"
 
 using namespace std;
 
-//объявляем main из каждого теста как отдельную функцию
-int test_dynamic_array_main();
-int test_linked_list_main();
-int test_mutable_array_main();
-int test_mutable_list_main();
-int test_operators_main();
-int test_result_info_main();
+void run_all_tests() {
+    cout << "\n=====================================" << endl;
+    cout << "  RUNNING ALL TESTS" << endl;
+    cout << "=====================================" << endl;
 
-int run_all_tests() {
-    cout << "  RUNNING ALL TESTS FOR LAB 2" << endl;
-    int failed = 0;
-    cout << "\n[1/6] Running DynamicArray tests..." << endl;
-    if (test_dynamic_array_main() != 0) failed++;
+    cout << "\n[1/6] DynamicArray tests:" << endl;
+    run_test_dynamic_array();
 
-    cout << "\n[2/6] Running LinkedList tests..." << endl;
-    if (test_linked_list_main() != 0) failed++;
+    cout << "\n[2/6] LinkedList tests:" << endl;
+    run_test_linked_list();
 
-    cout << "\n[3/6] Running MutableArray tests..." << endl;
-    if (test_mutable_array_main() != 0) failed++;
+    cout << "\n[3/6] MutableArraySequence tests:" << endl;
+    run_test_mutable_array();
 
-    cout << "\n[4/6] Running MutableList tests..." << endl;
-    if (test_mutable_list_main() != 0) failed++;
+    cout << "\n[4/6] MutableListSequence tests:" << endl;
+    run_test_mutable_list();
 
-    cout << "\n[5/6] Running Operators tests..." << endl;
-    if (test_operators_main() != 0) failed++;
+    cout << "\n[5/6] Operators tests:" << endl;
+    run_test_operators();
 
-    cout << "\n[6/6] Running ResultInfo tests..." << endl;
-    if (test_result_info_main() != 0) failed++;
+    cout << "\n[6/6] ResultInfo tests:" << endl;
+    run_test_result_info();
 
     cout << "\n=====================================" << endl;
-    if (failed == 0) {
-        cout << "  ALL TESTS PASSED! ✓" << endl;
-    } else {
-        cout << "  " << failed << " TEST(S) FAILED! ✗" << endl;
-    }
-    return failed;
+    cout << "  ALL TESTS COMPLETED!" << endl;
+    cout << "=====================================" << endl;
 }

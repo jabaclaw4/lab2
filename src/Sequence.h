@@ -33,16 +33,16 @@ public:
     //получить подпоследовательность от startIndex до endIndex (включительно)
     virtual Sequence<T>* GetSubsequence(int startIndex, int endIndex) const = 0;
     //методы изменения
-    virtual void Append(T item) = 0;
+    virtual Sequence<T>* Append(T item) = 0;
 
     //добавить элемент в начало
-    virtual void Prepend(T item) = 0;
+    virtual Sequence<T>* Prepend(T item) = 0;
 
     //вставить элемент на позицию index
-    virtual void InsertAt(T item, int index) = 0;
+    virtual Sequence<T>* InsertAt(T item, int index) = 0;
 
     //объединить с другой последовательностью
-    virtual Sequence<T>* Concat(Sequence<T>* other) const = 0;
+    virtual Sequence<T>* Concat(const Sequence<T>* other) const = 0;
     //методы для результ инфо (try)
     //попытка получить первый элемент (без исключения если пусто)
     virtual ResultInfo<T> TryGetFirst() const {
@@ -92,11 +92,11 @@ public:
  //перегрузка операторов  в целом можно и не виртуальные функции но если для наследников понадобится другая логика то полезно
     //seq[i]
     //позволяет писать seq[5] вместо seq->Get(5)
-    virtual T operator[](int index) const {
+    T operator[](int index) const {
         return this->Get(index);
     }
     //seq1 == seq2
-    virtual bool operator==(const Sequence<T>& other) const {
+    bool operator==(const Sequence<T>& other) const {
         //разная длина -> не равны
         if (this->GetLength() != other.GetLength()) {
             return false;
@@ -110,12 +110,12 @@ public:
         return true;
     }
     //seq1 != seq2
-    virtual bool operator!=(const Sequence<T>& other) const {
+    bool operator!=(const Sequence<T>& other) const {
         return !(*this == other);
     }
     //seq1 + seq2
     //возвращает новую последовательность [элементы seq1, элементы seq2]
-    virtual Sequence<T>* operator+(const Sequence<T>& other) const {
+    Sequence<T>* operator+(const Sequence<T>& other) const {
         //const_cast нужен потому что Concat принимает неконстантный указатель
         //нельзя передать const в функцию которая ожидает не const, concat не меняет other поэтому можем так делать
         //ну в целом можно добавить просто const к concat

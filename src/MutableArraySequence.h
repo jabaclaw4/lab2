@@ -2,33 +2,29 @@
 #define MUTABLE_ARRAY_SEQUENCE_H
 
 #include "ArraySequenceBase.h"
-////добавить комментария для личного понимания вспоминания
 //изменяемая последовательность на базе массива
 template <class T>
 class MutableArraySequence : public ArraySequenceBase<T> {
 public:
     //конструкторы
     MutableArraySequence() : ArraySequenceBase<T>() {}
-
     MutableArraySequence(T* items, int count) : ArraySequenceBase<T>(items, count) {}
-
     MutableArraySequence(int size) : ArraySequenceBase<T>(size) {}
-
     MutableArraySequence(const MutableArraySequence<T>& other) : ArraySequenceBase<T>(other) {}
 
-    //clone - создать копию
     ArraySequenceBase<T>* Clone() const override {
         return new MutableArraySequence<T>(*this);
     }
 
-    //методы ИЗМЕНЕНИЯ - изменяют ЭТОТ объект
-    void Append(T item) override {
+    //методы изменения
+    Sequence<T>* Append(T item) override {
         int oldSize = this->items->GetSize();
         this->items->Resize(oldSize + 1);
         this->items->Set(oldSize, item);
+        return this;
     }
 
-    void Prepend(T item) override {
+    Sequence<T>* Prepend(T item) override {
         int oldSize = this->items->GetSize();
         this->items->Resize(oldSize + 1);
 
@@ -37,23 +33,14 @@ public:
         }
 
         this->items->Set(0, item);
+        return this;
     }
 
-    void InsertAt(T item, int index) override {
+    Sequence<T>* InsertAt(T item, int index) override {
         int size = this->items->GetSize();
 
         if (index < 0 || index > size) {
             throw std::out_of_range("index out of range");
-        }
-
-        if (index == 0) {
-            Prepend(item);
-            return;
-        }
-
-        if (index == size) {
-            Append(item);
-            return;
         }
 
         this->items->Resize(size + 1);
@@ -63,6 +50,7 @@ public:
         }
 
         this->items->Set(index, item);
+        return this;
     }
 
     Sequence<T>* GetSubsequence(int startIndex, int endIndex) const override {
@@ -86,19 +74,19 @@ public:
         return subSeq;
     }
 
-    Sequence<T>* Concat(Sequence<T>* other) const override {
-        int newSize = this->GetLength() + other->GetLength();
-        MutableArraySequence<T>* result = new MutableArraySequence<T>(newSize);
+    Sequence<T>* Concat(const Sequence<T>* other) const override {
+        MutableArraySequence<T>* result = new MutableArraySequence<T>(*this);
 
-        for (int i = 0; i < this->GetLength(); i++) {
-            result->items->Set(i, this->items->Get(i));
-        }
+        //расширяем копию
+        int oldSize = result->GetLength();
+        int newSize = oldSize + other->GetLength();
+        result->items->Resize(newSize);
 
+        //добавляем элементы other в копию
         for (int i = 0; i < other->GetLength(); i++) {
-            result->items->Set(this->GetLength() + i, other->Get(i));
+            result->items->Set(oldSize + i, other->Get(i));
         }
-
-        return result;
+        return result;  //возвращаем копию
     }
 };
 

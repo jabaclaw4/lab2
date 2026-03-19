@@ -17,7 +17,7 @@ void check(bool condition, const char* name) {
     cout << " - " << name << endl;
 }
 
-int test_linked_list_main() {
+void run_test_linked_list() {
     cout << "=== тесты LinkedList ===" << endl;
 
     //пустой список

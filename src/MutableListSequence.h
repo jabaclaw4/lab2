@@ -11,29 +11,29 @@ public:
 
     //пустая последовательность
     MutableListSequence() : ListSequenceBase<T>() {}
-
     //создать из массива
     MutableListSequence(T* items, int count) : ListSequenceBase<T>(items, count) {}
-
     //копирующий конструктор
     MutableListSequence(const MutableListSequence<T>& other) : ListSequenceBase<T>(other) {}
-
-    //clone - создать копию
+    //создать копию
     ListSequenceBase<T>* Clone() const override {
         return new MutableListSequence<T>(*this);
     }
 
-    //методы изменения - изменяют этот объект
-    void Append(T item) override {
+    //методы изменения
+    Sequence<T>* Append(T item) override {
         this->items->Append(item);
+        return this;
     }
 
-    void Prepend(T item) override {
+    Sequence<T>* Prepend(T item) override {
         this->items->Prepend(item);
+        return this;
     }
 
-    void InsertAt(T item, int index) override {
+    Sequence<T>* InsertAt(T item, int index) override {
         this->items->InsertAt(item, index);
+        return this;
     }
 
     Sequence<T>* GetSubsequence(int startIndex, int endIndex) const override {
@@ -43,12 +43,11 @@ public:
         //создаём новую ListSequence на базе подсписка
         MutableListSequence<T>* result = new MutableListSequence<T>();
         delete result->items;  //удаляем пустой список
-        result->items = subList;  //заменяем на подсписок
-
+        result->items = subList;//заменяем на подсписок
         return result;
     }
 
-    Sequence<T>* Concat(Sequence<T>* other) const override {
+    Sequence<T>* Concat(const Sequence<T>* other) const override {
         //создаём новую последовательность
         MutableListSequence<T>* result = new MutableListSequence<T>();
 
@@ -56,7 +55,6 @@ public:
         for (int i = 0; i < this->GetLength(); i++) {
             result->Append(this->Get(i));
         }
-
         //копируем элементы из другой последовательности
         for (int i = 0; i < other->GetLength(); i++) {
             result->Append(other->Get(i));

@@ -17,11 +17,15 @@ void print_menu() {
     cout << "4 - Create ImmutableListSequence" << endl;
     cout << "5 - Append element" << endl;
     cout << "6 - Prepend element" << endl;
-    cout << "7 - Get element by index" << endl;
-    cout << "8 - TryGet (safe get)" << endl;
-    cout << "9 - Print sequence" << endl;
-    cout << "10 - Test operators demo" << endl;
-    cout << "11 - Run ALL tests" << endl;
+    cout << "7 - InsertAt element" << endl;
+    cout << "8 - Get element by index" << endl;
+    cout << "9 - GetFirst / GetLast" << endl;
+    cout << "10 - GetSubsequence" << endl;
+    cout << "11 - Concat with another sequence" << endl;
+    cout << "12 - TryGet (safe get)" << endl;
+    cout << "13 - Print sequence" << endl;
+    cout << "14 - Test operators demo" << endl;
+    cout << "15 - Run ALL tests" << endl;
     cout << "0 - Exit" << endl;
     cout << "Choice: ";
 }
@@ -30,13 +34,10 @@ void test_operators_demo() {
     cout << "\n=== DEMO: Operators ===" << endl;
 
     Sequence<int>* seq1 = new MutableArraySequence<int>();
-    seq1->Append(1);
-    seq1->Append(2);
-    seq1->Append(3);
+    seq1->Append(1)->Append(2)->Append(3);
 
     Sequence<int>* seq2 = new MutableArraySequence<int>();
-    seq2->Append(4);
-    seq2->Append(5);
+    seq2->Append(4)->Append(5);
 
     cout << "seq1 = " << *seq1 << endl;
     cout << "seq2 = " << *seq2 << endl;
@@ -98,7 +99,7 @@ int main() {
                 int value;
                 cout << "Enter value: ";
                 cin >> value;
-                g_seq->Append(value);
+                g_seq = g_seq->Append(value);
                 cout << "Appended " << value << endl;
                 break;
             }
@@ -110,11 +111,29 @@ int main() {
                 int value;
                 cout << "Enter value: ";
                 cin >> value;
-                g_seq->Prepend(value);
+                g_seq = g_seq->Prepend(value);
                 cout << "Prepended " << value << endl;
                 break;
             }
             case 7: {
+                if (g_seq == nullptr) {
+                    cout << "Create sequence first!" << endl;
+                    break;
+                }
+                int value, index;
+                cout << "Enter value: ";
+                cin >> value;
+                cout << "Enter index: ";
+                cin >> index;
+                try {
+                    g_seq = g_seq->InsertAt(value, index);
+                    cout << "Inserted " << value << " at index " << index << endl;
+                } catch (exception& e) {
+                    cout << "Error: " << e.what() << endl;
+                }
+                break;
+            }
+            case 8: {
                 if (g_seq == nullptr) {
                     cout << "Create sequence first!" << endl;
                     break;
@@ -130,7 +149,73 @@ int main() {
                 }
                 break;
             }
-            case 8: {
+            case 9: {
+                if (g_seq == nullptr) {
+                    cout << "Create sequence first!" << endl;
+                    break;
+                }
+                try {
+                    cout << "First element: " << g_seq->GetFirst() << endl;
+                    cout << "Last element: " << g_seq->GetLast() << endl;
+                } catch (exception& e) {
+                    cout << "Error: " << e.what() << endl;
+                }
+                break;
+            }
+            case 10: {
+                if (g_seq == nullptr) {
+                    cout << "Create sequence first!" << endl;
+                    break;
+                }
+                int startIndex, endIndex;
+                cout << "Enter start index: ";
+                cin >> startIndex;
+                cout << "Enter end index: ";
+                cin >> endIndex;
+                try {
+                    Sequence<int>* subSeq = g_seq->GetSubsequence(startIndex, endIndex);
+                    cout << "Subsequence [" << startIndex << ".." << endIndex << "]: " << *subSeq << endl;
+                    delete subSeq;
+                } catch (exception& e) {
+                    cout << "Error: " << e.what() << endl;
+                }
+                break;
+            }
+            case 11: {
+                if (g_seq == nullptr) {
+                    cout << "Create sequence first!" << endl;
+                    break;
+                }
+                cout << "Creating temporary sequence to concat..." << endl;
+                Sequence<int>* temp = new MutableArraySequence<int>();
+                int count;
+                cout << "How many elements to add? ";
+                cin >> count;
+                for (int i = 0; i < count; i++) {
+                    int value;
+                    cout << "Element " << (i+1) << ": ";
+                    cin >> value;
+                    temp = temp->Append(value);
+                }
+                cout << "Current sequence: " << *g_seq << endl;
+                cout << "Temp sequence: " << *temp << endl;
+
+                Sequence<int>* result = g_seq->Concat(temp);
+                cout << "Concatenated: " << *result << endl;
+
+                char replace;
+                cout << "Replace current sequence with result? (y/n): ";
+                cin >> replace;
+                if (replace == 'y' || replace == 'Y') {
+                    delete g_seq;
+                    g_seq = result;
+                } else {
+                    delete result;
+                }
+                delete temp;
+                break;
+            }
+            case 12: {
                 if (g_seq == nullptr) {
                     cout << "Create sequence first!" << endl;
                     break;
@@ -147,7 +232,7 @@ int main() {
                 }
                 break;
             }
-            case 9: {
+            case 13: {
                 if (g_seq == nullptr) {
                     cout << "Create sequence first!" << endl;
                     break;
@@ -156,12 +241,12 @@ int main() {
                 cout << "Length: " << g_seq->GetLength() << endl;
                 break;
             }
-            case 10: {
+            case 14: {
                 test_operators_demo();
                 break;
             }
-            case 11: {
-                run_all_tests();
+            case 15: {
+//                run_all_tests();
                 break;
             }
             default:

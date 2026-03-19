@@ -8,56 +8,31 @@ template <class T>
 class ImmutableListSequence : public ListSequenceBase<T> {
 public:
     //конструкторы
-
     //пустая последовательность
     ImmutableListSequence() : ListSequenceBase<T>() {}
-
     //создать из массива
     ImmutableListSequence(T* items, int count) : ListSequenceBase<T>(items, count) {}
-
     //копирующий конструктор
     ImmutableListSequence(const ImmutableListSequence<T>& other) : ListSequenceBase<T>(other) {}
-
-    //clone - создать копию
     ListSequenceBase<T>* Clone() const override {
         return new ImmutableListSequence<T>(*this);
     }
-
-    //методы изменения - не изменяют этот объект, создают новый
-    void Append(T item) override {
-        //создаём копию
-        ImmutableListSequence<T>* result = new ImmutableListSequence<T>(*this);
-
-        //изменяем копию
-        result->items->Append(item);
-
-        //подменяем данные
-        delete this->items;
-        this->items = result->items;
-        result->items = nullptr;
-        delete result;
+    Sequence<T>* Append(T item) override {
+        ImmutableListSequence<T>* copy = new ImmutableListSequence<T>(*this);
+        copy->items->Append(item);
+        return copy;
     }
 
-    void Prepend(T item) override {
-        ImmutableListSequence<T>* result = new ImmutableListSequence<T>(*this);
-
-        result->items->Prepend(item);
-
-        delete this->items;
-        this->items = result->items;
-        result->items = nullptr;
-        delete result;
+    Sequence<T>* Prepend(T item) override {
+        ImmutableListSequence<T>* copy = new ImmutableListSequence<T>(*this);
+        copy->items->Prepend(item);
+        return copy;
     }
 
-    void InsertAt(T item, int index) override {
-        ImmutableListSequence<T>* result = new ImmutableListSequence<T>(*this);
-
-        result->items->InsertAt(item, index);
-
-        delete this->items;
-        this->items = result->items;
-        result->items = nullptr;
-        delete result;
+    Sequence<T>* InsertAt(T item, int index) override {
+        ImmutableListSequence<T>* copy = new ImmutableListSequence<T>(*this);
+        copy->items->InsertAt(item, index);
+        return copy;
     }
 
     Sequence<T>* GetSubsequence(int startIndex, int endIndex) const override {
@@ -72,20 +47,14 @@ public:
         return result;
     }
 
-    Sequence<T>* Concat(Sequence<T>* other) const override {
+    Sequence<T>* Concat(const Sequence<T>* other) const override {
         //создаём новую последовательность
-        ImmutableListSequence<T>* result = new ImmutableListSequence<T>();
-
-        //копируем элементы из текущей последовательности
-        for (int i = 0; i < this->GetLength(); i++) {
-            result->Append(this->Get(i));
-        }
+        ImmutableListSequence<T>* result = new ImmutableListSequence<T>(*this);
 
         //копируем элементы из другой последовательности
         for (int i = 0; i < other->GetLength(); i++) {
-            result->Append(other->Get(i));
+            result->items->Append(other->Get(i));
         }
-
         return result;
     }
 };

@@ -17,7 +17,7 @@ void check(bool condition, const char* name) {
     cout << " - " << name << endl;
 }
 
-int test_dynamic_array_main() {
+void run_test_dynamic_array() {
     cout << "=== тесты DynamicArray ===" << endl;
 
     //граничные значения

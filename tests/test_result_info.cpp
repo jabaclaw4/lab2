@@ -6,8 +6,6 @@
 
 using namespace std;
 
-//===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
-
 int Double(int x) {
     return x * 2;
 }
@@ -52,8 +50,6 @@ void CountSuccess(int val) {
 void CountFailure(const char* err) {
     g_failureCount++;
 }
-
-//===== ТЕСТЫ =====
 
 void test_result_info_success() {
     cout << "test_result_info_success... ";
