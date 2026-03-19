@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../src/ BitSequence.h"
+#include "../src/BitSequence.h"
 
 using namespace std;
 

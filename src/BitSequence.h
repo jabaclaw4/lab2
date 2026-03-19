@@ -160,86 +160,60 @@ public:
         return this->bitCount;
     }
 
-    void Append(Bit item) override {
-        //создаём новую последовательность на 1 бит больше
-        int newBitCount = this->bitCount + 1;
+    Sequence<Bit>* Append(Bit item) override {
+        BitSequence* result = new BitSequence(*this);
+
+        int newBitCount = result->bitCount + 1;
         int newByteCount = (newBitCount + 7) / 8;
         unsigned char* newData = new unsigned char[newByteCount];
 
-        //копируем старые данные
-        for (int i = 0; i < this->byteCount; i++) {
-            newData[i] = this->data[i];
+        for (int i = 0; i < result->byteCount; i++) {
+            newData[i] = result->data[i];
         }
 
-        //инициализируем новые байты (если добавились)
-        for (int i = this->byteCount; i < newByteCount; i++) {
+        for (int i = result->byteCount; i < newByteCount; i++) {
             newData[i] = 0;
         }
-        //освобождаем старую память
-        delete[] this->data;
-        //обновляем поля
-        this->data = newData;
-        this->bitCount = newBitCount;
-        this->byteCount = newByteCount;
-        //устанавливаем новый бит
-        SetBitInternal(this->bitCount - 1, item.GetValue());
+
+        delete[] result->data;
+        result->data = newData;
+        result->bitCount = newBitCount;
+        result->byteCount = newByteCount;
+
+        result->SetBitInternal(result->bitCount - 1, item.GetValue());
+
+        return result;
     }
 
-    void Prepend(Bit item) override {
-        //создаём новую последовательность
+    Sequence<Bit>* Prepend(Bit item) override {
         BitSequence* newSeq = new BitSequence(this->bitCount + 1);
-        //устанавливаем первый бит
         newSeq->SetBitInternal(0, item.GetValue());
 
-        //копируем остальные биты
         for (int i = 0; i < this->bitCount; i++) {
             newSeq->SetBitInternal(i + 1, GetBitInternal(i));
         }
-        //подменяем данные
-        delete[] this->data;
-        this->data = newSeq->data;
-        this->bitCount = newSeq->bitCount;
-        this->byteCount = newSeq->byteCount;
 
-        newSeq->data = nullptr;
-        delete newSeq;
+        return newSeq;
     }
 
-    void InsertAt(Bit item, int index) override {
+    Sequence<Bit>* InsertAt(Bit item, int index) override {
         if (index < 0 || index > this->bitCount) {
             throw std::out_of_range("index out of range");
         }
-        if (index == 0) {
-            Prepend(item);
-            return;
-        }
-        if (index == this->bitCount) {
-            Append(item);
-            return;
-        }
 
-        //создаём новую последовательность
         BitSequence* newSeq = new BitSequence(this->bitCount + 1);
 
-        //копируем биты до index
         for (int i = 0; i < index; i++) {
             newSeq->SetBitInternal(i, GetBitInternal(i));
         }
-        //вставляем новый бит
+
         newSeq->SetBitInternal(index, item.GetValue());
-        //копируем биты после index
+
         for (int i = index; i < this->bitCount; i++) {
             newSeq->SetBitInternal(i + 1, GetBitInternal(i));
         }
 
-        //подменяем данные
-        delete[] this->data;
-        this->data = newSeq->data;
-        this->bitCount = newSeq->bitCount;
-        this->byteCount = newSeq->byteCount;
-
-        newSeq->data = nullptr;
-        delete newSeq;
+        return newSeq;
     }
 
     Sequence<Bit>* GetSubsequence(int startIndex, int endIndex) const override {
@@ -260,15 +234,14 @@ public:
         return result;
     }
 
-    Sequence<Bit>* Concat(Sequence<Bit>* other) const override {
+    Sequence<Bit>* Concat(const Sequence<Bit>* other) const override {
         int newLength = this->bitCount + other->GetLength();
         BitSequence* result = new BitSequence(newLength);
-        //копируем биты из текущей последовательности
+
         for (int i = 0; i < this->bitCount; i++) {
             result->SetBitInternal(i, GetBitInternal(i));
         }
 
-        //копируем биты из другой последовательности
         for (int i = 0; i < other->GetLength(); i++) {
             result->SetBitInternal(this->bitCount + i, other->Get(i).GetValue());
         }
