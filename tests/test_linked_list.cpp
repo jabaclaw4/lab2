@@ -1,21 +1,8 @@
 #include <iostream>
 #include "../src/LinkedList.h"
+#include "../src/test_utils.h"
 
 using namespace std;
-
-int total = 0;
-int passed = 0;
-
-void check(bool condition, const char* name) {
-    total++;
-    if (condition) {
-        passed++;
-        cout << "OK";
-    } else {
-        cout << "FAIL";
-    }
-    cout << " - " << name << endl;
-}
 
 void run_test_linked_list() {
     cout << "=== тесты LinkedList ===" << endl;
@@ -140,5 +127,4 @@ void run_test_linked_list() {
     check(caught, "исключение: getFirst на пустом");
 
     cout << "\nитог: " << passed << " / " << total << " OK" << endl;
-    return (passed == total) ? 0 : 1;
 }

@@ -55,6 +55,60 @@ build CMakeFiles/lab2.dir/main.cpp.obj: CXX_COMPILER__lab2_unscanned_Debug C$:/U
   OBJECT_DIR = CMakeFiles\lab2.dir
   OBJECT_FILE_DIR = CMakeFiles\lab2.dir
 
+build CMakeFiles/lab2.dir/tests/test_operators.cpp.obj: CXX_COMPILER__lab2_unscanned_Debug C$:/Users/jabaclaw4/CLionProjects/lab2/tests/test_operators.cpp || cmake_object_order_depends_target_lab2
+  DEP_FILE = CMakeFiles\lab2.dir\tests\test_operators.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\lab2.dir
+  OBJECT_FILE_DIR = CMakeFiles\lab2.dir\tests
+
+build CMakeFiles/lab2.dir/tests/run_all_tests.cpp.obj: CXX_COMPILER__lab2_unscanned_Debug C$:/Users/jabaclaw4/CLionProjects/lab2/tests/run_all_tests.cpp || cmake_object_order_depends_target_lab2
+  DEP_FILE = CMakeFiles\lab2.dir\tests\run_all_tests.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\lab2.dir
+  OBJECT_FILE_DIR = CMakeFiles\lab2.dir\tests
+
+build CMakeFiles/lab2.dir/tests/test_dynamic_array.cpp.obj: CXX_COMPILER__lab2_unscanned_Debug C$:/Users/jabaclaw4/CLionProjects/lab2/tests/test_dynamic_array.cpp || cmake_object_order_depends_target_lab2
+  DEP_FILE = CMakeFiles\lab2.dir\tests\test_dynamic_array.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\lab2.dir
+  OBJECT_FILE_DIR = CMakeFiles\lab2.dir\tests
+
+build CMakeFiles/lab2.dir/tests/test_linked_list.cpp.obj: CXX_COMPILER__lab2_unscanned_Debug C$:/Users/jabaclaw4/CLionProjects/lab2/tests/test_linked_list.cpp || cmake_object_order_depends_target_lab2
+  DEP_FILE = CMakeFiles\lab2.dir\tests\test_linked_list.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\lab2.dir
+  OBJECT_FILE_DIR = CMakeFiles\lab2.dir\tests
+
+build CMakeFiles/lab2.dir/tests/test_mutable_array.cpp.obj: CXX_COMPILER__lab2_unscanned_Debug C$:/Users/jabaclaw4/CLionProjects/lab2/tests/test_mutable_array.cpp || cmake_object_order_depends_target_lab2
+  DEP_FILE = CMakeFiles\lab2.dir\tests\test_mutable_array.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\lab2.dir
+  OBJECT_FILE_DIR = CMakeFiles\lab2.dir\tests
+
+build CMakeFiles/lab2.dir/tests/test_mutable_list.cpp.obj: CXX_COMPILER__lab2_unscanned_Debug C$:/Users/jabaclaw4/CLionProjects/lab2/tests/test_mutable_list.cpp || cmake_object_order_depends_target_lab2
+  DEP_FILE = CMakeFiles\lab2.dir\tests\test_mutable_list.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\lab2.dir
+  OBJECT_FILE_DIR = CMakeFiles\lab2.dir\tests
+
+build CMakeFiles/lab2.dir/tests/test_result_info.cpp.obj: CXX_COMPILER__lab2_unscanned_Debug C$:/Users/jabaclaw4/CLionProjects/lab2/tests/test_result_info.cpp || cmake_object_order_depends_target_lab2
+  DEP_FILE = CMakeFiles\lab2.dir\tests\test_result_info.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\lab2.dir
+  OBJECT_FILE_DIR = CMakeFiles\lab2.dir\tests
+
+build CMakeFiles/lab2.dir/tests/test_bit_sequence.cpp.obj: CXX_COMPILER__lab2_unscanned_Debug C$:/Users/jabaclaw4/CLionProjects/lab2/tests/test_bit_sequence.cpp || cmake_object_order_depends_target_lab2
+  DEP_FILE = CMakeFiles\lab2.dir\tests\test_bit_sequence.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\lab2.dir
+  OBJECT_FILE_DIR = CMakeFiles\lab2.dir\tests
+
+build CMakeFiles/lab2.dir/tests/test_utils.cpp.obj: CXX_COMPILER__lab2_unscanned_Debug C$:/Users/jabaclaw4/CLionProjects/lab2/tests/test_utils.cpp || cmake_object_order_depends_target_lab2
+  DEP_FILE = CMakeFiles\lab2.dir\tests\test_utils.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\lab2.dir
+  OBJECT_FILE_DIR = CMakeFiles\lab2.dir\tests
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target lab2
@@ -63,7 +117,7 @@ build CMakeFiles/lab2.dir/main.cpp.obj: CXX_COMPILER__lab2_unscanned_Debug C$:/U
 #############################################
 # Link the executable lab2.exe
 
-build lab2.exe: CXX_EXECUTABLE_LINKER__lab2_Debug CMakeFiles/lab2.dir/main.cpp.obj
+build lab2.exe: CXX_EXECUTABLE_LINKER__lab2_Debug CMakeFiles/lab2.dir/main.cpp.obj CMakeFiles/lab2.dir/tests/test_operators.cpp.obj CMakeFiles/lab2.dir/tests/run_all_tests.cpp.obj CMakeFiles/lab2.dir/tests/test_dynamic_array.cpp.obj CMakeFiles/lab2.dir/tests/test_linked_list.cpp.obj CMakeFiles/lab2.dir/tests/test_mutable_array.cpp.obj CMakeFiles/lab2.dir/tests/test_mutable_list.cpp.obj CMakeFiles/lab2.dir/tests/test_result_info.cpp.obj CMakeFiles/lab2.dir/tests/test_bit_sequence.cpp.obj CMakeFiles/lab2.dir/tests/test_utils.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\lab2.dir

@@ -4,7 +4,8 @@
 #include "src/ImmutableArraySequence.h"
 #include "src/MutableListSequence.h"
 #include "src/ImmutableListSequence.h"
-//нужно исправить тесты добавить их все на проверку и тд разобраться с монадой добавить в демо бит секуанс с проверкой тестов на маски и тд
+//нужно исправить тесты на русс их, добавить тесты для иммьтабл, переписать немного чтобы суммарное ok писал
+//доразобраться с монадой и бит секуанс добавить в демо консоль бит секуанс с проверкой тестов на маски и тд
 using namespace std;
 
 Sequence<int>* g_seq = nullptr;
@@ -246,7 +247,7 @@ int main() {
                 break;
             }
             case 15: {
-//                run_all_tests();
+                run_all_tests();
                 break;
             }
             default:

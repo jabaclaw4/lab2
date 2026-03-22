@@ -250,7 +250,7 @@ public:
     }
 
     //побитовые операции
-    //побитовое AND
+    //побитовое and
     BitSequence* BitwiseAnd(const BitSequence& other) const {
         if (this->bitCount != other.bitCount) {
             throw std::invalid_argument("bit sequences must have same length for AND");
@@ -266,7 +266,7 @@ public:
         return result;
     }
 
-    //побитовое OR
+    //побитовое or
     BitSequence* BitwiseOr(const BitSequence& other) const {
         if (this->bitCount != other.bitCount) {
             throw std::invalid_argument("bit sequences must have same length for OR");
@@ -281,7 +281,7 @@ public:
         return result;
     }
 
-    //побитовое XOR
+    //побитовое xor
     BitSequence* BitwiseXor(const BitSequence& other) const {
         if (this->bitCount != other.bitCount) {
             throw std::invalid_argument("bit sequences must have same length for XOR");
@@ -296,7 +296,7 @@ public:
         return result;
     }
 
-    //побитовое NOT (инверсия)
+    //побитовое not (инверсия)
     BitSequence* BitwiseNot() const {
         BitSequence* result = new BitSequence(this->bitCount);
 

@@ -3,6 +3,7 @@
 #include <string>
 #include "../src/ResultInfo.h"
 #include "../src/MutableArraySequence.h"
+#include "../src/test_utils.h"
 
 using namespace std;
 
@@ -39,7 +40,6 @@ void PrintError(const char* err) {
     cout << "Error: " << err << endl;
 }
 
-//глобальные счётчики для test_match
 int g_successCount = 0;
 int g_failureCount = 0;
 
@@ -81,7 +81,7 @@ void test_try_get_first() {
     ResultInfo<int> result1 = empty->TryGetFirst();
     assert(result1.IsFailure());
 
-    empty->Append(10);
+    empty = empty->Append(10);
     ResultInfo<int> result2 = empty->TryGetFirst();
     assert(result2.IsSuccess());
     assert(result2.GetValue() == 10);
@@ -94,9 +94,7 @@ void test_try_get() {
     cout << "test_try_get... ";
 
     Sequence<int>* seq = new MutableArraySequence<int>();
-    seq->Append(5);
-    seq->Append(10);
-    seq->Append(15);
+    seq = seq->Append(5)->Append(10)->Append(15);
 
     ResultInfo<int> result1 = seq->TryGet(1);
     assert(result1.IsSuccess());
@@ -160,10 +158,7 @@ void test_try_find() {
     cout << "test_try_find... ";
 
     Sequence<int>* seq = new MutableArraySequence<int>();
-    seq->Append(5);
-    seq->Append(10);
-    seq->Append(20);
-    seq->Append(25);
+    seq = seq->Append(5)->Append(10)->Append(20)->Append(25);
 
     ResultInfo<int> found = seq->TryFind(IsGreaterThan15);
     assert(found.IsSuccess());
@@ -177,10 +172,7 @@ void test_try_find_index() {
     cout << "test_try_find_index... ";
 
     Sequence<int>* seq = new MutableArraySequence<int>();
-    seq->Append(5);
-    seq->Append(10);
-    seq->Append(20);
-    seq->Append(25);
+    seq = seq->Append(5)->Append(10)->Append(20)->Append(25);
 
     ResultInfo<int> index = seq->TryFindIndex(Equals20);
     assert(index.IsSuccess());
@@ -190,8 +182,8 @@ void test_try_find_index() {
     cout << "PASS" << endl;
 }
 
-int test_result_info_main() {
-    cout << "Running ResultInfo tests..." << endl << endl;
+void run_test_result_info() {
+    reset_counters();
 
     test_result_info_success();
     test_result_info_failure();
@@ -203,6 +195,5 @@ int test_result_info_main() {
     test_try_find();
     test_try_find_index();
 
-    cout << endl << "All ResultInfo tests passed!" << endl;
-    return 0;
+    print_results();
 }

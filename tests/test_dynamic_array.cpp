@@ -1,21 +1,9 @@
 #include <iostream>
 #include "../src/DynamicArray.h"
+#include "../src/test_utils.h"
 
 using namespace std;
 
-int total = 0;
-int passed = 0;
-
-void check(bool condition, const char* name) {
-    total++;
-    if (condition) {
-        passed++;
-        cout << "OK";
-    } else {
-        cout << "FAIL";
-    }
-    cout << " - " << name << endl;
-}
 
 void run_test_dynamic_array() {
     cout << "=== тесты DynamicArray ===" << endl;
@@ -100,5 +88,4 @@ void run_test_dynamic_array() {
     check(caught, "исключение: отрицательный размер");
 
     cout << "\nитог: " << passed << " / " << total << " OK" << endl;
-    return (passed == total) ? 0 : 1;
 }

@@ -1,23 +1,11 @@
 #include <iostream>
 #include "../src/BitSequence.h"
+#include "../src/test_utils.h"
 
 using namespace std;
 
-int total = 0;
-int passed = 0;
 
-void check(bool condition, const char* name) {
-    total++;
-    if (condition) {
-        passed++;
-        cout << "OK";
-    } else {
-        cout << "FAIL";
-    }
-    cout << " - " << name << endl;
-}
-
-int main() {
+void run_test_bit_sequence() {
     cout << "=== тесты BitSequence ===" << endl;
 
     //создание пустой последовательности
@@ -82,7 +70,7 @@ int main() {
 
     //побитовое NOT
     bs4 = new BitSequence(bits1, 4);  //1101
-    BitSequence* notResult = bs4->BitwiseNot();  //0010
+    BitSequence* notResult = bs4->BitwiseNot(); //0010
     check(notResult->Get(0).GetValue() == false, "NOT: бит 0");
     check(notResult->Get(1).GetValue() == true, "NOT: бит 1");
     check(notResult->Get(2).GetValue() == true, "NOT: бит 2");
@@ -93,7 +81,7 @@ int main() {
     //битовая маска (пример от препода)
     //права: read=1, write=1, execute=0 → маска 110
     Bit permissions[] = {Bit(false), Bit(true), Bit(true)};  //011 (execute, write, read)
-    Bit mask[] = {Bit(false), Bit(true), Bit(true)};          //011 (проверяем write и read)
+    Bit mask[] = {Bit(false), Bit(true), Bit(true)};  //011 (проверяем write и read)
     BitSequence* perm = new BitSequence(permissions, 3);
     BitSequence* msk = new BitSequence(mask, 3);
     BitSequence* result = perm->BitwiseAnd(*msk);
@@ -105,5 +93,4 @@ int main() {
     delete result;
 
     cout << "\nитог: " << passed << " / " << total << " OK" << endl;
-    return (passed == total) ? 0 : 1;
 }
