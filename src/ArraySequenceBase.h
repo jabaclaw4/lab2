@@ -11,8 +11,7 @@
 template <class T>
 class ArraySequenceBase : public Sequence<T> {
 protected:
-    DynamicArray<T>* items; //внутри используем DynamicArray
-
+    DynamicArray<T>* items;
     //конструкторы protected - только наследники могут использовать
     //создать пустую последовательность
     ArraySequenceBase() {

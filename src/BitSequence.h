@@ -90,9 +90,6 @@ protected:
     }
 
     Sequence<Bit>* appendImpl(const Bit& elem) override {
-        //НЕ МЕНЯЕМ this! Работаем на копии через instance()
-        //this уже КОПИЯ (созданная в instance()), можно менять
-
         int newBitCount = this->bitCount + 1;
         int newByteCount = (newBitCount + 7) / 8;
         unsigned char* newData = new unsigned char[newByteCount];

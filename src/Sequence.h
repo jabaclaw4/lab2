@@ -108,7 +108,6 @@ public:
         return ResultInfo<int>::Failure("Element not found");
     }
 
-//перегрузка операторов в целом можно и не виртуальные функции но если для наследников понадобится другая логика то полезно
     //seq[i]
     //позволяет писать seq[5] вместо seq->Get(5)
     T operator[](int index) const {

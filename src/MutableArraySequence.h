@@ -7,7 +7,7 @@
 template <class T>
 class MutableArraySequence : public ArraySequenceBase<T> {
 protected:
-    //instance() возвращает this (изменяем себя)
+    //изменяем себя
     Sequence<T>* instance() override {
         return this;
     }

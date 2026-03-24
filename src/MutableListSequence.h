@@ -7,7 +7,6 @@
 template <class T>
 class MutableListSequence : public ListSequenceBase<T> {
 protected:
-    //instance() возвращает this
     Sequence<T>* instance() override {
         return this;
     }
