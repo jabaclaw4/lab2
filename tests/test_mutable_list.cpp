@@ -8,19 +8,19 @@ using namespace std;
 void run_test_mutable_list() {
     reset_counters();
 
-    cout << "=== тесты MutableListSequence ===" << endl;
+    cout << "=== MutableListSequence Tests ===" << endl;
 
     //пустая последовательность
     MutableListSequence<int>* seq1 = new MutableListSequence<int>();
-    check(seq1->GetLength() == 0, "пустая: length = 0");
+    check(seq1->GetLength() == 0, "empty: length = 0");
     delete seq1;
 
     //создание из массива
     int data[] = {10, 20, 30};
     MutableListSequence<int>* seq2 = new MutableListSequence<int>(data, 3);
-    check(seq2->GetLength() == 3, "из массива: length = 3");
-    check(seq2->Get(0) == 10, "из массива: первый элемент");
-    check(seq2->Get(2) == 30, "из массива: последний элемент");
+    check(seq2->GetLength() == 3, "from array: length = 3");
+    check(seq2->Get(0) == 10, "from array: first element");
+    check(seq2->Get(2) == 30, "from array: last element");
     delete seq2;
 
     //append
@@ -28,8 +28,8 @@ void run_test_mutable_list() {
     seq3 = (MutableListSequence<int>*)seq3->Append(10);
     seq3 = (MutableListSequence<int>*)seq3->Append(20);
     check(seq3->GetLength() == 2, "append: length = 2");
-    check(seq3->GetFirst() == 10, "append: первый");
-    check(seq3->GetLast() == 20, "append: последний");
+    check(seq3->GetFirst() == 10, "append: first");
+    check(seq3->GetLast() == 20, "append: last");
     delete seq3;
 
     //prepend
@@ -37,31 +37,31 @@ void run_test_mutable_list() {
     seq4 = (MutableListSequence<int>*)seq4->Prepend(10);
     seq4 = (MutableListSequence<int>*)seq4->Prepend(20);
     seq4 = (MutableListSequence<int>*)seq4->Prepend(30);
-    check(seq4->GetFirst() == 30, "prepend: первый = 30");
-    check(seq4->Get(1) == 20, "prepend: средний = 20");
-    check(seq4->GetLast() == 10, "prepend: последний = 10");
+    check(seq4->GetFirst() == 30, "prepend: first = 30");
+    check(seq4->Get(1) == 20, "prepend: middle = 20");
+    check(seq4->GetLast() == 10, "prepend: last = 10");
     delete seq4;
 
     //insertAt в начало
     MutableListSequence<int>* seq5 = new MutableListSequence<int>(data, 3);
     seq5 = (MutableListSequence<int>*)seq5->InsertAt(99, 0);
-    check(seq5->Get(0) == 99, "insertAt(0): вставлен");
-    check(seq5->Get(1) == 10, "insertAt(0): сдвиг");
+    check(seq5->Get(0) == 99, "insertAt(0): inserted");
+    check(seq5->Get(1) == 10, "insertAt(0): shift");
     check(seq5->GetLength() == 4, "insertAt(0): length");
     delete seq5;
 
     //insertAt в середину
     MutableListSequence<int>* seq6 = new MutableListSequence<int>(data, 3);
     seq6 = (MutableListSequence<int>*)seq6->InsertAt(99, 1);
-    check(seq6->Get(0) == 10, "insertAt(1): элемент 0");
-    check(seq6->Get(1) == 99, "insertAt(1): вставлен");
-    check(seq6->Get(2) == 20, "insertAt(1): сдвиг");
+    check(seq6->Get(0) == 10, "insertAt(1): element 0");
+    check(seq6->Get(1) == 99, "insertAt(1): inserted");
+    check(seq6->Get(2) == 20, "insertAt(1): shift");
     delete seq6;
 
     //insertAt в конец
     MutableListSequence<int>* seq7 = new MutableListSequence<int>(data, 3);
     seq7 = (MutableListSequence<int>*)seq7->InsertAt(99, 3);
-    check(seq7->GetLast() == 99, "insertAt(end): вставлен");
+    check(seq7->GetLast() == 99, "insertAt(end): inserted");
     check(seq7->GetLength() == 4, "insertAt(end): length");
     delete seq7;
 
@@ -70,8 +70,8 @@ void run_test_mutable_list() {
     MutableListSequence<int>* seq8 = new MutableListSequence<int>(data2, 5);
     Sequence<int>* sub = seq8->GetSubsequence(1, 3);
     check(sub->GetLength() == 3, "getSubsequence: length");
-    check(sub->Get(0) == 2, "getSubsequence: первый");
-    check(sub->Get(2) == 4, "getSubsequence: последний");
+    check(sub->Get(0) == 2, "getSubsequence: first");
+    check(sub->Get(2) == 4, "getSubsequence: last");
     delete seq8;
     delete sub;
 
@@ -80,8 +80,8 @@ void run_test_mutable_list() {
     MutableListSequence<int>* seq10 = new MutableListSequence<int>(data + 2, 1);
     Sequence<int>* concat = seq9->Concat(seq10);
     check(concat->GetLength() == 3, "concat: length");
-    check(concat->Get(0) == 10, "concat: из первого");
-    check(concat->Get(2) == 30, "concat: из второго");
+    check(concat->Get(0) == 10, "concat: from first");
+    check(concat->Get(2) == 30, "concat: from second");
     delete seq9;
     delete seq10;
     delete concat;
@@ -91,24 +91,24 @@ void run_test_mutable_list() {
     seq11 = (MutableListSequence<int>*)seq11->Append(-2147483648);
     seq11 = (MutableListSequence<int>*)seq11->Append(0);
     seq11 = (MutableListSequence<int>*)seq11->Append(2147483647);
-    check(seq11->Get(0) == -2147483648, "экстремум: int_min");
-    check(seq11->Get(1) == 0, "экстремум: ноль");
-    check(seq11->Get(2) == 2147483647, "экстремум: int_max");
+    check(seq11->Get(0) == -2147483648, "extreme: int_min");
+    check(seq11->Get(1) == 0, "extreme: zero");
+    check(seq11->Get(2) == 2147483647, "extreme: int_max");
     delete seq11;
 
     //копирование
     MutableListSequence<int>* seq12 = new MutableListSequence<int>(data, 3);
     MutableListSequence<int>* seq13 = new MutableListSequence<int>(*seq12);
-    check(seq13->GetLength() == 3, "копирование: length");
-    check(seq13->Get(0) == 10, "копирование: данные");
+    check(seq13->GetLength() == 3, "copy: length");
+    check(seq13->Get(0) == 10, "copy: data");
     delete seq12;
     delete seq13;
 
-    cout << "\n=== тесты ImmutableListSequence ===" << endl;
+    cout << "\n=== ImmutableListSequence Tests ===" << endl;
 
 //пустая
     Sequence<int>* imm1 = new ImmutableListSequence<int>();
-    check(imm1->GetLength() == 0, "immutable пустая: length = 0");
+    check(imm1->GetLength() == 0, "immutable empty: length = 0");
     delete imm1;
 
 //append
@@ -122,8 +122,8 @@ void run_test_mutable_list() {
     delete old_imm2;
 
     check(imm2->GetLength() == 2, "immutable append: length");
-    check(imm2->GetFirst() == 10, "immutable append: первый");
-    check(imm2->GetLast() == 20, "immutable append: последний");
+    check(imm2->GetFirst() == 10, "immutable append: first");
+    check(imm2->GetLast() == 20, "immutable append: last");
     delete imm2;
 
 //prepend
@@ -136,8 +136,8 @@ void run_test_mutable_list() {
     imm3 = imm3->Prepend(20);
     delete old_imm3;
 
-    check(imm3->GetFirst() == 20, "immutable prepend: первый");
-    check(imm3->GetLast() == 10, "immutable prepend: последний");
+    check(imm3->GetFirst() == 20, "immutable prepend: first");
+    check(imm3->GetLast() == 10, "immutable prepend: last");
     delete imm3;
 
 //insertAt
@@ -146,7 +146,7 @@ void run_test_mutable_list() {
     imm4 = imm4->InsertAt(99, 1);
     delete old_imm4;
 
-    check(imm4->Get(1) == 99, "immutable insertAt: вставлен");
+    check(imm4->Get(1) == 99, "immutable insertAt: inserted");
     check(imm4->GetLength() == 4, "immutable insertAt: length");
     delete imm4;
 

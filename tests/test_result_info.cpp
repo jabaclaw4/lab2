@@ -52,138 +52,108 @@ void CountFailure(const char* err) {
 }
 
 void test_result_info_success() {
-    cout << "test_result_info_success... ";
-
     ResultInfo<int> result = ResultInfo<int>::Success(42);
 
-    assert(result.IsSuccess());
-    assert(!result.IsFailure());
-    assert(result.GetValue() == 42);
-
-    cout << "PASS" << endl;
+    check(result.IsSuccess(), "result_info_success: IsSuccess");
+    check(!result.IsFailure(), "result_info_success: not IsFailure");
+    check(result.GetValue() == 42, "result_info_success: value");
 }
 
 void test_result_info_failure() {
-    cout << "test_result_info_failure... ";
-
     ResultInfo<int> result = ResultInfo<int>::Failure("error message");
 
-    assert(!result.IsSuccess());
-    assert(result.IsFailure());
-
-    cout << "PASS" << endl;
+    check(!result.IsSuccess(), "result_info_failure: not IsSuccess");
+    check(result.IsFailure(), "result_info_failure: IsFailure");
 }
 
 void test_try_get_first() {
-    cout << "test_try_get_first... ";
-
     Sequence<int>* empty = new MutableArraySequence<int>();
     ResultInfo<int> result1 = empty->TryGetFirst();
-    assert(result1.IsFailure());
+    check(result1.IsFailure(), "try_get_first: empty fails");
 
     empty = empty->Append(10);
     ResultInfo<int> result2 = empty->TryGetFirst();
-    assert(result2.IsSuccess());
-    assert(result2.GetValue() == 10);
+    check(result2.IsSuccess(), "try_get_first: success");
+    check(result2.GetValue() == 10, "try_get_first: value");
 
     delete empty;
-    cout << "PASS" << endl;
 }
 
 void test_try_get() {
-    cout << "test_try_get... ";
-
     Sequence<int>* seq = new MutableArraySequence<int>();
     seq = seq->Append(5)->Append(10)->Append(15);
 
     ResultInfo<int> result1 = seq->TryGet(1);
-    assert(result1.IsSuccess());
-    assert(result1.GetValue() == 10);
+    check(result1.IsSuccess(), "try_get: success");
+    check(result1.GetValue() == 10, "try_get: value");
 
     ResultInfo<int> result2 = seq->TryGet(100);
-    assert(result2.IsFailure());
+    check(result2.IsFailure(), "try_get: out of range fails");
 
     delete seq;
-    cout << "PASS" << endl;
 }
 
 void test_map() {
-    cout << "test_map... ";
-
     ResultInfo<int> result = ResultInfo<int>::Success(10);
 
     ResultInfo<int> doubled = result.Map(Double);
-    assert(doubled.IsSuccess());
-    assert(doubled.GetValue() == 20);
+    check(doubled.IsSuccess(), "map: success");
+    check(doubled.GetValue() == 20, "map: doubled value");
 
     ResultInfo<int> error = ResultInfo<int>::Failure("oops");
     ResultInfo<int> processed = error.Map(Double);
-    assert(processed.IsFailure());
-
-    cout << "PASS" << endl;
+    check(processed.IsFailure(), "map: error propagates");
 }
 
 void test_filter() {
-    cout << "test_filter... ";
-
     ResultInfo<int> result = ResultInfo<int>::Success(10);
     ResultInfo<int> filtered = result.Filter(IsPositive, "must be positive");
-    assert(filtered.IsSuccess());
+    check(filtered.IsSuccess(), "filter: positive passes");
 
     ResultInfo<int> result2 = ResultInfo<int>::Success(-5);
     ResultInfo<int> filtered2 = result2.Filter(IsPositive, "must be positive");
-    assert(filtered2.IsFailure());
-
-    cout << "PASS" << endl;
+    check(filtered2.IsFailure(), "filter: negative fails");
 }
 
 void test_match() {
-    cout << "test_match... ";
-
     g_successCount = 0;
     g_failureCount = 0;
 
     ResultInfo<int>::Success(42).Match(CountSuccess, CountFailure);
-    assert(g_successCount == 1);
-    assert(g_failureCount == 0);
+    check(g_successCount == 1, "match: success called");
+    check(g_failureCount == 0, "match: failure not called");
 
     ResultInfo<int>::Failure("error").Match(CountSuccess, CountFailure);
-    assert(g_successCount == 1);
-    assert(g_failureCount == 1);
-
-    cout << "PASS" << endl;
+    check(g_successCount == 1, "match: success count unchanged");
+    check(g_failureCount == 1, "match: failure called");
 }
 
 void test_try_find() {
-    cout << "test_try_find... ";
-
     Sequence<int>* seq = new MutableArraySequence<int>();
     seq = seq->Append(5)->Append(10)->Append(20)->Append(25);
 
     ResultInfo<int> found = seq->TryFind(IsGreaterThan15);
-    assert(found.IsSuccess());
-    assert(found.GetValue() == 20);
+    check(found.IsSuccess(), "try_find: found");
+    check(found.GetValue() == 20, "try_find: correct value");
 
     delete seq;
-    cout << "PASS" << endl;
 }
 
 void test_try_find_index() {
-    cout << "test_try_find_index... ";
-
     Sequence<int>* seq = new MutableArraySequence<int>();
     seq = seq->Append(5)->Append(10)->Append(20)->Append(25);
 
     ResultInfo<int> index = seq->TryFindIndex(Equals20);
-    assert(index.IsSuccess());
-    assert(index.GetValue() == 2);
+    check(index.IsSuccess(), "try_find_index: found");
+    check(index.GetValue() == 2, "try_find_index: correct index");
 
     delete seq;
-    cout << "PASS" << endl;
 }
 
 void run_test_result_info() {
     reset_counters();
+
+    cout << "=== ResultInfo Tests ===" << endl;
 
     test_result_info_success();
     test_result_info_failure();

@@ -3,12 +3,15 @@
 
 #include "Sequence.h"
 #include "LinkedList.h"
+#include <stdexcept>
 
 //базовый класс с общим кодом для mutable и immutable
 template <class T>
 class ListSequenceBase : public Sequence<T> {
 protected:
-    LinkedList<T>* items; //конструкторы protected чтобы только наследники могут использовать
+    LinkedList<T>* items;
+
+    //конструкторы protected чтобы только наследники могут использовать
     //пустая последовательность
     ListSequenceBase() {
         this->items = new LinkedList<T>();
@@ -20,6 +23,22 @@ protected:
     //копирующий конструктор
     ListSequenceBase(const ListSequenceBase<T>& other) {
         this->items = new LinkedList<T>(*other.items);
+    }
+
+    //реализация добавления (общая для Mutable и Immutable)
+    Sequence<T>* appendImpl(const T& elem) override {
+        this->items->Append(elem);
+        return this;
+    }
+
+    Sequence<T>* prependImpl(const T& elem) override {
+        this->items->Prepend(elem);
+        return this;
+    }
+
+    Sequence<T>* insertAtImpl(const T& elem, int index) override {
+        this->items->InsertAt(elem, index);
+        return this;
     }
 
 public:
@@ -45,8 +64,38 @@ public:
         return this->items->GetLength();
     }
 
-    //вспомогательная функция: создать копию
-    virtual ListSequenceBase<T>* Clone() const = 0;
+    Sequence<T>* GetSubsequence(int startIndex, int endIndex) const override {
+        //получаем подсписок из LinkedList
+        LinkedList<T>* subList = this->items->GetSubList(startIndex, endIndex);
+
+        //создаём новую ListSequence на базе подсписка
+        ListSequenceBase<T>* result = this->CreateNew();
+        delete result->items;  //удаляем пустой список
+        result->items = subList;  //заменяем на подсписок
+
+        return result;
+    }
+
+    Sequence<T>* Concat(const Sequence<T>* other) const override {
+        //создаём новую последовательность
+        ListSequenceBase<T>* result = this->CreateNew();
+
+        //копируем элементы из текущей последовательности
+        for (int i = 0; i < this->GetLength(); i++) {
+            result->items->Append(this->Get(i));
+        }
+
+        //копируем элементы из другой последовательности
+        for (int i = 0; i < other->GetLength(); i++) {
+            result->items->Append(other->Get(i));
+        }
+
+        return result;
+    }
+
+protected:
+    //вспомогательная функция создать новый экземпляр (реализуется в наследниках)
+    virtual ListSequenceBase<T>* CreateNew() const = 0;
 };
 
 #endif

@@ -85,7 +85,31 @@
 		<Unit filename="C:/Users/User/CLionProjects/lab2/main.cpp">
 			<Option target="lab2"/>
 		</Unit>
+		<Unit filename="C:/Users/User/CLionProjects/lab2/tests/run_all_tests.cpp">
+			<Option target="lab2"/>
+		</Unit>
+		<Unit filename="C:/Users/User/CLionProjects/lab2/tests/test_bit_sequence.cpp">
+			<Option target="lab2"/>
+		</Unit>
+		<Unit filename="C:/Users/User/CLionProjects/lab2/tests/test_dynamic_array.cpp">
+			<Option target="lab2"/>
+		</Unit>
+		<Unit filename="C:/Users/User/CLionProjects/lab2/tests/test_linked_list.cpp">
+			<Option target="lab2"/>
+		</Unit>
+		<Unit filename="C:/Users/User/CLionProjects/lab2/tests/test_mutable_array.cpp">
+			<Option target="lab2"/>
+		</Unit>
+		<Unit filename="C:/Users/User/CLionProjects/lab2/tests/test_mutable_list.cpp">
+			<Option target="lab2"/>
+		</Unit>
 		<Unit filename="C:/Users/User/CLionProjects/lab2/tests/test_operators.cpp">
+			<Option target="lab2"/>
+		</Unit>
+		<Unit filename="C:/Users/User/CLionProjects/lab2/tests/test_result_info.cpp">
+			<Option target="lab2"/>
+		</Unit>
+		<Unit filename="C:/Users/User/CLionProjects/lab2/tests/test_utils.cpp">
 			<Option target="lab2"/>
 		</Unit>
 		<Unit filename="C:/Users/User/CLionProjects/lab2/CMakeLists.txt">

@@ -11,7 +11,7 @@ public:
     T data;  //данные узла
     Node<T>* next;//указатель на следующий узел
 
-    Node(T data, Node<T>* next = nullptr) {
+    Node(const T& data, Node<T>* next = nullptr) {
         this->data = data;
         this->next = next;
     }
@@ -131,7 +131,7 @@ public:
     }
 
     //добавить элемент в конец
-    void Append(T item) {
+    void Append(const T& item) {
         Node<T>* newNode = new Node<T>(item);
 
         if (this->length == 0) {
@@ -148,7 +148,7 @@ public:
     }
 
     //добавить элемент в начало
-    void Prepend(T item) {
+    void Prepend(const T& item) {
         Node<T>* newNode = new Node<T>(item, this->head);
 
         if (this->length == 0) {
@@ -163,7 +163,7 @@ public:
     }
 
     //вставить элемент на позицию index
-    void InsertAt(T item, int index) {
+    void InsertAt(const T& item, int index) {
         //проверки
         if (index < 0 || index > this->length) {
             throw std::out_of_range("Index out of range");
@@ -193,7 +193,7 @@ public:
     }
 
     //объединить два списка
-    LinkedList<T>* Concat(LinkedList<T>* other) const {
+    LinkedList<T>* Concat(const LinkedList<T>* other) const {
         LinkedList<T>* result = new LinkedList<T>();
         //копируем элементы из текущего списка
         Node<T>* current = this->head;

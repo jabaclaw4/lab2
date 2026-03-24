@@ -94,7 +94,7 @@ public:
         return this->capacity;
     }
     //установить элемент по индексу
-    void Set(int index, T value) {
+    void Set(int index, const T& value) {
         if (index < 0 || index >= this->size) {
             throw std::out_of_range("Index out of range");
         }

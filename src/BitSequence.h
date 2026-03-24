@@ -83,6 +83,109 @@ private:
         }
     }
 
+protected:
+    //instance() возвращает копию (BitSequence всегда immutable)
+    Sequence<Bit>* instance() override {
+        return new BitSequence(*this);
+    }
+
+    Sequence<Bit>* appendImpl(const Bit& elem) override {
+        int newBitCount = this->bitCount + 1;
+        int newByteCount = (newBitCount + 7) / 8;
+        unsigned char* newData = new unsigned char[newByteCount];
+
+        for (int i = 0; i < this->byteCount; i++) {
+            newData[i] = this->data[i];
+        }
+
+        for (int i = this->byteCount; i < newByteCount; i++) {
+            newData[i] = 0;
+        }
+
+        delete[] this->data;
+        this->data = newData;
+        this->bitCount = newBitCount;
+        this->byteCount = newByteCount;
+
+        SetBitInternal(this->bitCount - 1, elem.GetValue());
+
+        return this;
+    }
+
+    Sequence<Bit>* prependImpl(const Bit& elem) override {
+        int newBitCount = this->bitCount + 1;
+        int newByteCount = (newBitCount + 7) / 8;
+        unsigned char* newData = new unsigned char[newByteCount];
+
+        for (int i = 0; i < newByteCount; i++) {
+            newData[i] = 0;
+        }
+
+        for (int i = 0; i < this->bitCount; i++) {
+            int byteIndex = (i + 1) / 8;
+            int bitInByte = (i + 1) % 8;
+            if (GetBitInternal(i)) {
+                newData[byteIndex] |= (1 << bitInByte);
+            }
+        }
+
+        if (elem.GetValue()) {
+            newData[0] |= 1;
+        }
+
+        delete[] this->data;
+        this->data = newData;
+        this->bitCount = newBitCount;
+        this->byteCount = newByteCount;
+
+        return this;
+    }
+
+    Sequence<Bit>* insertAtImpl(const Bit& elem, int index) override {
+        if (index < 0 || index > this->bitCount) {
+            throw std::out_of_range("index out of range");
+        }
+
+        int newBitCount = this->bitCount + 1;
+        int newByteCount = (newBitCount + 7) / 8;
+        unsigned char* newData = new unsigned char[newByteCount];
+
+        for (int i = 0; i < newByteCount; i++) {
+            newData[i] = 0;
+        }
+
+        for (int i = 0; i < index; i++) {
+            int byteIndex = i / 8;
+            int bitInByte = i % 8;
+            if (GetBitInternal(i)) {
+                newData[byteIndex] |= (1 << bitInByte);
+            }
+        }
+
+        {
+            int byteIndex = index / 8;
+            int bitInByte = index % 8;
+            if (elem.GetValue()) {
+                newData[byteIndex] |= (1 << bitInByte);
+            }
+        }
+
+        for (int i = index; i < this->bitCount; i++) {
+            int byteIndex = (i + 1) / 8;
+            int bitInByte = (i + 1) % 8;
+            if (GetBitInternal(i)) {
+                newData[byteIndex] |= (1 << bitInByte);
+            }
+        }
+
+        delete[] this->data;
+        this->data = newData;
+        this->bitCount = newBitCount;
+        this->byteCount = newByteCount;
+
+        return this;
+    }
+
 public:
     //конструктор: создать битовую последовательность заданной длины
     BitSequence(int length) {
@@ -160,62 +263,6 @@ public:
         return this->bitCount;
     }
 
-    Sequence<Bit>* Append(Bit item) override {
-        BitSequence* result = new BitSequence(*this);
-
-        int newBitCount = result->bitCount + 1;
-        int newByteCount = (newBitCount + 7) / 8;
-        unsigned char* newData = new unsigned char[newByteCount];
-
-        for (int i = 0; i < result->byteCount; i++) {
-            newData[i] = result->data[i];
-        }
-
-        for (int i = result->byteCount; i < newByteCount; i++) {
-            newData[i] = 0;
-        }
-
-        delete[] result->data;
-        result->data = newData;
-        result->bitCount = newBitCount;
-        result->byteCount = newByteCount;
-
-        result->SetBitInternal(result->bitCount - 1, item.GetValue());
-
-        return result;
-    }
-
-    Sequence<Bit>* Prepend(Bit item) override {
-        BitSequence* newSeq = new BitSequence(this->bitCount + 1);
-        newSeq->SetBitInternal(0, item.GetValue());
-
-        for (int i = 0; i < this->bitCount; i++) {
-            newSeq->SetBitInternal(i + 1, GetBitInternal(i));
-        }
-
-        return newSeq;
-    }
-
-    Sequence<Bit>* InsertAt(Bit item, int index) override {
-        if (index < 0 || index > this->bitCount) {
-            throw std::out_of_range("index out of range");
-        }
-
-        BitSequence* newSeq = new BitSequence(this->bitCount + 1);
-
-        for (int i = 0; i < index; i++) {
-            newSeq->SetBitInternal(i, GetBitInternal(i));
-        }
-
-        newSeq->SetBitInternal(index, item.GetValue());
-
-        for (int i = index; i < this->bitCount; i++) {
-            newSeq->SetBitInternal(i + 1, GetBitInternal(i));
-        }
-
-        return newSeq;
-    }
-
     Sequence<Bit>* GetSubsequence(int startIndex, int endIndex) const override {
         if (startIndex < 0 || startIndex >= this->bitCount) {
             throw std::out_of_range("start index out of range");
@@ -250,7 +297,7 @@ public:
     }
 
     //побитовые операции
-    //побитовое and
+    //побитовое AND
     BitSequence* BitwiseAnd(const BitSequence& other) const {
         if (this->bitCount != other.bitCount) {
             throw std::invalid_argument("bit sequences must have same length for AND");
@@ -266,7 +313,7 @@ public:
         return result;
     }
 
-    //побитовое or
+    //побитовое OR
     BitSequence* BitwiseOr(const BitSequence& other) const {
         if (this->bitCount != other.bitCount) {
             throw std::invalid_argument("bit sequences must have same length for OR");
@@ -281,7 +328,7 @@ public:
         return result;
     }
 
-    //побитовое xor
+    //побитовое XOR
     BitSequence* BitwiseXor(const BitSequence& other) const {
         if (this->bitCount != other.bitCount) {
             throw std::invalid_argument("bit sequences must have same length for XOR");
@@ -296,7 +343,7 @@ public:
         return result;
     }
 
-    //побитовое not (инверсия)
+    //побитовое NOT (инверсия)
     BitSequence* BitwiseNot() const {
         BitSequence* result = new BitSequence(this->bitCount);
 

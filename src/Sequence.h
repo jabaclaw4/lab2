@@ -1,8 +1,8 @@
 #ifndef SEQUENCE_H
 #define SEQUENCE_H
 
-#include <iostream>//для вывода в консоль (перегрузка)
 #include "ResultInfo.h"
+
 //напоминалки
 //базовый абстрактный класс для всех последовательностей (полиморфизм работаем с seq не зная что внутри)
 //virtual = функция может работать по-разному в зависимости от реального типа объекта
@@ -15,8 +15,18 @@
 //сам абстрактный класс Sequence высокий уровень организует логику через нижний уровень (выше озвученные классы)
 template <class T> //щаблон = один код для всех типов
 class Sequence {
+protected:
+    //чисто виртуальный - возвращает this или копию
+    virtual Sequence<T>* instance() = 0;
+
+    //чисто виртуальные - реализация добавления
+    virtual Sequence<T>* appendImpl(const T& elem) = 0;
+    virtual Sequence<T>* prependImpl(const T& elem) = 0;
+    virtual Sequence<T>* insertAtImpl(const T& elem, int index) = 0;
+
 public:
     virtual ~Sequence() {}
+
 //методы чтения
     //получить первый элемент (бросает исключение если пусто)
     virtual T GetFirst() const = 0;
@@ -32,18 +42,27 @@ public:
 
     //получить подпоследовательность от startIndex до endIndex (включительно)
     virtual Sequence<T>* GetSubsequence(int startIndex, int endIndex) const = 0;
-    //методы изменения
-    virtual Sequence<T>* Append(T item) = 0;
+
+//методы изменения
+    //добавить элемент в конец
+    virtual Sequence<T>* Append(const T& elem) {
+        return instance()->appendImpl(elem);
+    }
 
     //добавить элемент в начало
-    virtual Sequence<T>* Prepend(T item) = 0;
+    virtual Sequence<T>* Prepend(const T& elem) {
+        return instance()->prependImpl(elem);
+    }
 
     //вставить элемент на позицию index
-    virtual Sequence<T>* InsertAt(T item, int index) = 0;
+    virtual Sequence<T>* InsertAt(const T& elem, int index) {
+        return instance()->insertAtImpl(elem, index);
+    }
 
     //объединить с другой последовательностью
     virtual Sequence<T>* Concat(const Sequence<T>* other) const = 0;
-    //методы для результ инфо (try)
+
+//методы для результ инфо (try)
     //попытка получить первый элемент (без исключения если пусто)
     virtual ResultInfo<T> TryGetFirst() const {
         if (this->GetLength() == 0) {
@@ -89,12 +108,13 @@ public:
         return ResultInfo<int>::Failure("Element not found");
     }
 
- //перегрузка операторов  в целом можно и не виртуальные функции но если для наследников понадобится другая логика то полезно
+//перегрузка операторов в целом можно и не виртуальные функции но если для наследников понадобится другая логика то полезно
     //seq[i]
     //позволяет писать seq[5] вместо seq->Get(5)
     T operator[](int index) const {
         return this->Get(index);
     }
+
     //seq1 == seq2
     bool operator==(const Sequence<T>& other) const {
         //разная длина -> не равны
@@ -109,33 +129,17 @@ public:
         }
         return true;
     }
+
     //seq1 != seq2
     bool operator!=(const Sequence<T>& other) const {
         return !(*this == other);
     }
+
     //seq1 + seq2
     //возвращает новую последовательность [элементы seq1, элементы seq2]
     Sequence<T>* operator+(const Sequence<T>& other) const {
-        //const_cast нужен потому что Concat принимает неконстантный указатель
-        //нельзя передать const в функцию которая ожидает не const, concat не меняет other поэтому можем так делать
-        //ну в целом можно добавить просто const к concat
-        return this->Concat(const_cast<Sequence<T>*>(&other));
+        return this->Concat(&other);
     }
 };
-
-//cout << seq
-//выводит в формате [1, 2, 3]
-template <class T>
-std::ostream& operator<<(std::ostream& os, const Sequence<T>& seq) {//ostream& = ссылка на поток
-    os << "[";
-    for (int i = 0; i < seq.GetLength(); i++) {
-        os << seq[i];
-        if (i < seq.GetLength() - 1) {//везде запятая кроме последнего
-            os << ", ";
-        }
-    }
-    os << "]";
-    return os;//для цепочек
-}
 
 #endif

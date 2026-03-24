@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/jabaclaw4/CLionProjects/lab2/cmake-build-debug",
-		"source" : "C:/Users/jabaclaw4/CLionProjects/lab2"
+		"build" : "C:/Users/User/CLionProjects/lab2/cmake-build-debug",
+		"source" : "C:/Users/User/CLionProjects/lab2"
 	},
 	"version" : 
 	{

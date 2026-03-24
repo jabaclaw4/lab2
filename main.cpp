@@ -4,8 +4,9 @@
 #include "src/ImmutableArraySequence.h"
 #include "src/MutableListSequence.h"
 #include "src/ImmutableListSequence.h"
-//нужно исправить тесты на русс их, добавить тесты для иммьтабл, переписать немного чтобы суммарное ok писал
+
 //доразобраться с монадой и бит секуанс добавить в демо консоль бит секуанс с проверкой тестов на маски и тд
+
 using namespace std;
 
 Sequence<int>* g_seq = nullptr;
