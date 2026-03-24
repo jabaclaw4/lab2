@@ -248,6 +248,30 @@ tests/test_linked_list.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_linked_list.cpp.s
 .PHONY : tests/test_linked_list.cpp.s
 
+tests/test_matrix.obj: tests/test_matrix.cpp.obj
+.PHONY : tests/test_matrix.obj
+
+# target to build an object file
+tests/test_matrix.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_matrix.cpp.obj
+.PHONY : tests/test_matrix.cpp.obj
+
+tests/test_matrix.i: tests/test_matrix.cpp.i
+.PHONY : tests/test_matrix.i
+
+# target to preprocess a source file
+tests/test_matrix.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_matrix.cpp.i
+.PHONY : tests/test_matrix.cpp.i
+
+tests/test_matrix.s: tests/test_matrix.cpp.s
+.PHONY : tests/test_matrix.s
+
+# target to generate assembly for a file
+tests/test_matrix.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_matrix.cpp.s
+.PHONY : tests/test_matrix.cpp.s
+
 tests/test_mutable_array.obj: tests/test_mutable_array.cpp.obj
 .PHONY : tests/test_mutable_array.obj
 
@@ -392,6 +416,9 @@ help:
 	@echo ... tests/test_linked_list.obj
 	@echo ... tests/test_linked_list.i
 	@echo ... tests/test_linked_list.s
+	@echo ... tests/test_matrix.obj
+	@echo ... tests/test_matrix.i
+	@echo ... tests/test_matrix.s
 	@echo ... tests/test_mutable_array.obj
 	@echo ... tests/test_mutable_array.i
 	@echo ... tests/test_mutable_array.s

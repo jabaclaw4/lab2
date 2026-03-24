@@ -13,6 +13,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/User/CLionProjects/lab2/tests/test_bit_sequence.cpp" "CMakeFiles/lab2.dir/tests/test_bit_sequence.cpp.obj" "gcc" "CMakeFiles/lab2.dir/tests/test_bit_sequence.cpp.obj.d"
   "C:/Users/User/CLionProjects/lab2/tests/test_dynamic_array.cpp" "CMakeFiles/lab2.dir/tests/test_dynamic_array.cpp.obj" "gcc" "CMakeFiles/lab2.dir/tests/test_dynamic_array.cpp.obj.d"
   "C:/Users/User/CLionProjects/lab2/tests/test_linked_list.cpp" "CMakeFiles/lab2.dir/tests/test_linked_list.cpp.obj" "gcc" "CMakeFiles/lab2.dir/tests/test_linked_list.cpp.obj.d"
+  "C:/Users/User/CLionProjects/lab2/tests/test_matrix.cpp" "CMakeFiles/lab2.dir/tests/test_matrix.cpp.obj" "gcc" "CMakeFiles/lab2.dir/tests/test_matrix.cpp.obj.d"
   "C:/Users/User/CLionProjects/lab2/tests/test_mutable_array.cpp" "CMakeFiles/lab2.dir/tests/test_mutable_array.cpp.obj" "gcc" "CMakeFiles/lab2.dir/tests/test_mutable_array.cpp.obj.d"
   "C:/Users/User/CLionProjects/lab2/tests/test_mutable_list.cpp" "CMakeFiles/lab2.dir/tests/test_mutable_list.cpp.obj" "gcc" "CMakeFiles/lab2.dir/tests/test_mutable_list.cpp.obj.d"
   "C:/Users/User/CLionProjects/lab2/tests/test_operators.cpp" "CMakeFiles/lab2.dir/tests/test_operators.cpp.obj" "gcc" "CMakeFiles/lab2.dir/tests/test_operators.cpp.obj.d"

@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/lab2.dir/tests/test_dynamic_array.cpp.obj.d"
   "CMakeFiles/lab2.dir/tests/test_linked_list.cpp.obj"
   "CMakeFiles/lab2.dir/tests/test_linked_list.cpp.obj.d"
+  "CMakeFiles/lab2.dir/tests/test_matrix.cpp.obj"
+  "CMakeFiles/lab2.dir/tests/test_matrix.cpp.obj.d"
   "CMakeFiles/lab2.dir/tests/test_mutable_array.cpp.obj"
   "CMakeFiles/lab2.dir/tests/test_mutable_array.cpp.obj.d"
   "CMakeFiles/lab2.dir/tests/test_mutable_list.cpp.obj"

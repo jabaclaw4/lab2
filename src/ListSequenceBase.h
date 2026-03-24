@@ -65,30 +65,41 @@ public:
     }
 
     Sequence<T>* GetSubsequence(int startIndex, int endIndex) const override {
-        //получаем подсписок из LinkedList
+        if (startIndex < 0 || startIndex >= this->GetLength()) {
+            throw std::out_of_range("start index out of range");
+        }
+        if (endIndex < 0 || endIndex >= this->GetLength()) {
+            throw std::out_of_range("end index out of range");
+        }
+        if (startIndex > endIndex) {
+            throw std::invalid_argument("start index > end index");
+        }
+
         LinkedList<T>* subList = this->items->GetSubList(startIndex, endIndex);
 
-        //создаём новую ListSequence на базе подсписка
         ListSequenceBase<T>* result = this->CreateNew();
-        delete result->items;  //удаляем пустой список
-        result->items = subList;  //заменяем на подсписок
+        delete result->items;
+        result->items = subList;
 
         return result;
     }
 
     Sequence<T>* Concat(const Sequence<T>* other) const override {
-        //создаём новую последовательность
-        ListSequenceBase<T>* result = this->CreateNew();
+        LinkedList<T>* newList = new LinkedList<T>();
 
-        //копируем элементы из текущей последовательности
-        for (int i = 0; i < this->GetLength(); i++) {
-            result->items->Append(this->Get(i));
+        //копируем из this
+        for (int i = 0; i < this->items->GetLength(); i++) {
+            newList->Append(this->items->Get(i));
         }
 
-        //копируем элементы из другой последовательности
+        //копируем из other
         for (int i = 0; i < other->GetLength(); i++) {
-            result->items->Append(other->Get(i));
+            newList->Append(other->Get(i));
         }
+
+        ListSequenceBase<T>* result = this->CreateNew();
+        delete result->items;
+        result->items = newList;
 
         return result;
     }

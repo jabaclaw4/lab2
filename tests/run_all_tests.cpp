@@ -26,6 +26,8 @@ void run_all_tests() {
     cout << "\n[7/8] BitSequence tests:" << endl;
     run_test_bit_sequence();
 
-    cout << "\n[7/8] BitSequence tests:" << endl;
+    cout << "\n[8/8] BitSequence tests:" << endl;
     test_matrix_2x2();
+
+    cout << "all complete" << endl;
 }

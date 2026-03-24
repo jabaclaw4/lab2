@@ -13,4 +13,5 @@ add_executable(lab2 main.cpp
         tests/test_result_info.cpp
         tests/test_bit_sequence.cpp
         tests/test_utils.cpp
+        tests/test_matrix.cpp
 )

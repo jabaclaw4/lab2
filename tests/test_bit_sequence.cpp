@@ -4,9 +4,10 @@
 
 using namespace std;
 
-
 void run_test_bit_sequence() {
-    cout << "=== тесты BitSequence ===" << endl;
+    reset_counters();
+
+    cout << "=== BitSequence Tests ===" << endl;
 
     //создание пустой последовательности
     BitSequence* bs1 = new BitSequence(0);
@@ -15,19 +16,30 @@ void run_test_bit_sequence() {
 
     //создание последовательности из 8 бит
     BitSequence* bs2 = new BitSequence(8);
-    check(bs2->GetLength() == 8, "8 bytes: length = 8");
-    check(bs2->Get(0).GetValue() == false, "8 bytes: all zero");
+    check(bs2->GetLength() == 8, "8 bits: length = 8");
+    check(bs2->Get(0).GetValue() == false, "8 bits: all zero");
     delete bs2;
 
-    //append
-    BitSequence* bs3 = new BitSequence(0);
-    bs3->Append(Bit(true));
-    bs3->Append(Bit(false));
-    bs3->Append(Bit(true));
+    //append BitSequence возвращает новый об
+    Sequence<Bit>* bs3 = new BitSequence(0);
+    Sequence<Bit>* old_bs3;
+
+    old_bs3 = bs3;
+    bs3 = bs3->Append(Bit(true));
+    delete old_bs3;
+
+    old_bs3 = bs3;
+    bs3 = bs3->Append(Bit(false));
+    delete old_bs3;
+
+    old_bs3 = bs3;
+    bs3 = bs3->Append(Bit(true));
+    delete old_bs3;
+
     check(bs3->GetLength() == 3, "append: length = 3");
-    check(bs3->Get(0).GetValue() == true, "append: byte 0 = 1");
-    check(bs3->Get(1).GetValue() == false, "append: byte 1 = 0");
-    check(bs3->Get(2).GetValue() == true, "append: byte 2 = 1");
+    check(bs3->Get(0).GetValue() == true, "append: bit 0 = 1");
+    check(bs3->Get(1).GetValue() == false, "append: bit 1 = 0");
+    check(bs3->Get(2).GetValue() == true, "append: bit 2 = 1");
     delete bs3;
 
     //побитовое AND
@@ -36,10 +48,10 @@ void run_test_bit_sequence() {
     BitSequence* bs4 = new BitSequence(bits1, 4);  //1101
     BitSequence* bs5 = new BitSequence(bits2, 4);  //1011
     BitSequence* andResult = bs4->BitwiseAnd(*bs5);  //1001
-    check(andResult->Get(0).GetValue() == true, "AND: byte 0");
-    check(andResult->Get(1).GetValue() == false, "AND: byte 1");
-    check(andResult->Get(2).GetValue() == false, "AND: byte 2");
-    check(andResult->Get(3).GetValue() == true, "AND: byte 3");
+    check(andResult->Get(0).GetValue() == true, "AND: bit 0");
+    check(andResult->Get(1).GetValue() == false, "AND: bit 1");
+    check(andResult->Get(2).GetValue() == false, "AND: bit 2");
+    check(andResult->Get(3).GetValue() == true, "AND: bit 3");
     delete bs4;
     delete bs5;
     delete andResult;
@@ -48,10 +60,10 @@ void run_test_bit_sequence() {
     bs4 = new BitSequence(bits1, 4);  //1101
     bs5 = new BitSequence(bits2, 4);  //1011
     BitSequence* orResult = bs4->BitwiseOr(*bs5);  //1111
-    check(orResult->Get(0).GetValue() == true, "OR: byte 0");
-    check(orResult->Get(1).GetValue() == true, "OR: byte 1");
-    check(orResult->Get(2).GetValue() == true, "OR: byte 2");
-    check(orResult->Get(3).GetValue() == true, "OR: byte 3");
+    check(orResult->Get(0).GetValue() == true, "OR: bit 0");
+    check(orResult->Get(1).GetValue() == true, "OR: bit 1");
+    check(orResult->Get(2).GetValue() == true, "OR: bit 2");
+    check(orResult->Get(3).GetValue() == true, "OR: bit 3");
     delete bs4;
     delete bs5;
     delete orResult;
@@ -60,10 +72,10 @@ void run_test_bit_sequence() {
     bs4 = new BitSequence(bits1, 4);  //1101
     bs5 = new BitSequence(bits2, 4);  //1011
     BitSequence* xorResult = bs4->BitwiseXor(*bs5);  //0110
-    check(xorResult->Get(0).GetValue() == false, "XOR: byte 0");
-    check(xorResult->Get(1).GetValue() == true, "XOR: byte 1");
-    check(xorResult->Get(2).GetValue() == true, "XOR: byte 2");
-    check(xorResult->Get(3).GetValue() == false, "XOR: byte 3");
+    check(xorResult->Get(0).GetValue() == false, "XOR: bit 0");
+    check(xorResult->Get(1).GetValue() == true, "XOR: bit 1");
+    check(xorResult->Get(2).GetValue() == true, "XOR: bit 2");
+    check(xorResult->Get(3).GetValue() == false, "XOR: bit 3");
     delete bs4;
     delete bs5;
     delete xorResult;
@@ -71,15 +83,15 @@ void run_test_bit_sequence() {
     //побитовое NOT
     bs4 = new BitSequence(bits1, 4);  //1101
     BitSequence* notResult = bs4->BitwiseNot(); //0010
-    check(notResult->Get(0).GetValue() == false, "NOT: byte 0");
-    check(notResult->Get(1).GetValue() == true, "NOT: byte 1");
-    check(notResult->Get(2).GetValue() == true, "NOT: byte 2");
-    check(notResult->Get(3).GetValue() == false, "NOT: byte 3");
+    check(notResult->Get(0).GetValue() == false, "NOT: bit 0");
+    check(notResult->Get(1).GetValue() == true, "NOT: bit 1");
+    check(notResult->Get(2).GetValue() == true, "NOT: bit 2");
+    check(notResult->Get(3).GetValue() == false, "NOT: bit 3");
     delete bs4;
     delete notResult;
 
     //битовая маска
-    //права: read=1, write=1, execute=0 → маска 110
+    //права: read=1, write=1, execute=0 → маска 011
     Bit permissions[] = {Bit(false), Bit(true), Bit(true)};  //011 (execute, write, read)
     Bit mask[] = {Bit(false), Bit(true), Bit(true)};  //011 (проверяем write и read)
     BitSequence* perm = new BitSequence(permissions, 3);
@@ -92,5 +104,5 @@ void run_test_bit_sequence() {
     delete msk;
     delete result;
 
-    cout << "\nsummary: " << passed << " / " << total << " OK" << endl;
+    print_results();
 }

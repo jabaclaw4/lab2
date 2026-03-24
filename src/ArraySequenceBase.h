@@ -117,14 +117,17 @@ public:
     }
 
     Sequence<T>* Concat(const Sequence<T>* other) const override {
-        ArraySequenceBase<T>* result = this->CreateNew(this->items->GetSize() + other->GetLength());
+        int newSize = this->GetLength() + other->GetLength();
+        ArraySequenceBase<T>* result = this->CreateNew(newSize);
 
-        for (int i = 0; i < this->items->GetSize(); i++) {
+        //копируем из this
+        for (int i = 0; i < this->GetLength(); i++) {
             result->items->Set(i, this->items->Get(i));
         }
 
+        //копируем из other
         for (int i = 0; i < other->GetLength(); i++) {
-            result->items->Set(this->items->GetSize() + i, other->Get(i));
+            result->items->Set(this->GetLength() + i, other->Get(i));
         }
 
         return result;

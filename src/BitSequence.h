@@ -42,9 +42,9 @@ public:
 
 class BitSequence : public Sequence<Bit> {
 private:
-    unsigned char* data;//массив байтов (каждый байт = 8 бит)
+    unsigned char* data;//массив байтов
     int bitCount; //количество бит
-    int byteCount;//количество байтов (bitCount/8 округление вверх)
+    int byteCount;//количество байтов округление вверх
 
     //вспомогательная функция: получить индекс байта и бита внутри байта
     void GetByteAndBitIndex(int bitIndex, int& byteIndex, int& bitInByte) const {
@@ -75,10 +75,10 @@ private:
         GetByteAndBitIndex(index, byteIndex, bitInByte);
 
         if (value) {
-            //установить бит в 1: побитовое ИЛИ с маской
+            //установить бит в 1: побитовое или с маской
             this->data[byteIndex] |= (1 << bitInByte);
         } else {
-            //установить бит в 0: побитовое И с инвертированной маской
+            //установить бит в 0: побитовое и с инвертированной маской
             this->data[byteIndex] &= ~(1 << bitInByte);
         }
     }
@@ -90,6 +90,9 @@ protected:
     }
 
     Sequence<Bit>* appendImpl(const Bit& elem) override {
+        //НЕ МЕНЯЕМ this! Работаем на копии через instance()
+        //this уже КОПИЯ (созданная в instance()), можно менять
+
         int newBitCount = this->bitCount + 1;
         int newByteCount = (newBitCount + 7) / 8;
         unsigned char* newData = new unsigned char[newByteCount];
@@ -185,7 +188,6 @@ protected:
 
         return this;
     }
-
 public:
     //конструктор: создать битовую последовательность заданной длины
     BitSequence(int length) {

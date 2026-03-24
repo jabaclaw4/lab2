@@ -2,6 +2,7 @@
 #define DYNAMIC_ARRAY_H
 
 #include <stdexcept>//для исключений
+
 //хранение данных
 template <class T>
 class DynamicArray {
@@ -52,7 +53,7 @@ public:
         }
     }
 
-//копия другого динамич массива
+    //копия другого динамич массива
     DynamicArray(const DynamicArray<T>& other) {
         this->size = other.size;
         this->capacity = other.capacity;
@@ -60,7 +61,7 @@ public:
         if (other.size > 0) {
             this->data = new T[other.capacity];
 
-            // Копируем данные
+            //копируем данные
             for (int i = 0; i < other.size; i++) {
                 this->data[i] = other.data[i];
             }
@@ -68,14 +69,45 @@ public:
             this->data = nullptr;
         }
     }
-//деструктор
+
+    //оператор присваивания копирования для dynamic dynamic
+    DynamicArray& operator=(const DynamicArray<T>& other) {
+        if (this == &other) {
+            return *this;  //защита от self-assignment
+        }
+
+        //удаляем старые данные
+        if (this->data != nullptr) {
+            delete[] this->data;
+            this->data = nullptr;
+        }
+
+        //копируем размер и вместимость
+        this->size = other.size;
+        this->capacity = other.capacity;
+
+        //выделяем новую память
+        if (other.size > 0) {
+            this->data = new T[other.capacity];
+
+            //копируем данные
+            for (int i = 0; i < other.size; i++) {
+                this->data[i] = other.data[i];
+            }
+        } else {
+            this->data = nullptr;
+        }
+
+        return *this;
+    }
+
+    //деструктор
     ~DynamicArray() {
         if (this->data != nullptr) {
             delete[] this->data;
             this->data = nullptr;
         }
     }
-
 
     T Get(int index) const {//получить данные по индексу
         if (index < 0 || index >= this->size) {
@@ -93,6 +125,7 @@ public:
     int GetCapacity() const {
         return this->capacity;
     }
+
     //установить элемент по индексу
     void Set(int index, const T& value) {
         if (index < 0 || index >= this->size) {
@@ -107,10 +140,12 @@ public:
         if (newSize < 0) {
             throw std::invalid_argument("New size cannot be negative");
         }
-        // если новый размер = текущему, ничего не делаем
+
+        //если новый размер = текущему, ничего не делаем
         if (newSize == this->size) {
             return;
         }
+
         //если новый размер = 0, очищаем массив
         if (newSize == 0) {
             if (this->data != nullptr) {
@@ -121,21 +156,26 @@ public:
             this->capacity = 0;
             return;
         }
+
         //создаём новый массив
         T* newData = new T[newSize];
+
         //копируем данные (сколько поместится)
         int elementsToCopy = (newSize < this->size) ? newSize : this->size;
         for (int i = 0; i < elementsToCopy; i++) {
             newData[i] = this->data[i];
         }
+
         //если увеличили размер, инициализируем новые элементы
         for (int i = this->size; i < newSize; i++) {
             newData[i] = T();//конструктор по умолчанию
         }
+
         //удаляем старые данные
         if (this->data != nullptr) {
             delete[] this->data;
         }
+
         this->data = newData;
         this->size = newSize;
         this->capacity = newSize;

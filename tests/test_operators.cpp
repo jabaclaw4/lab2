@@ -1,8 +1,8 @@
 #include <iostream>
 #include <sstream>
-#include <cassert>
 #include "../src/MutableArraySequence.h"
 #include "../src/test_utils.h"
+#include "../src/SequenceUtils.h"
 
 using namespace std;
 
