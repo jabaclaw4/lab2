@@ -126,13 +126,13 @@ int main() {
             }
             case 5: {
                 if (g_seq == nullptr) {
-                    cout << "ERROR: Create sequence first!" << endl;
+                    cout << "ERROR: Create sequence first" << endl;
                     break;
                 }
                 int value;
                 cout << "Enter value: ";
                 if (!(cin >> value)) {
-                    cout << "ERROR: Invalid input!" << endl;
+                    cout << "ERROR: Invalid input" << endl;
                     cin.clear();
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     break;
@@ -143,13 +143,13 @@ int main() {
             }
             case 6: {
                 if (g_seq == nullptr) {
-                    cout << "ERROR: Create sequence first!" << endl;
+                    cout << "ERROR: Create sequence first" << endl;
                     break;
                 }
                 int value;
                 cout << "Enter value: ";
                 if (!(cin >> value)) {
-                    cout << "ERROR: Invalid input!" << endl;
+                    cout << "ERROR: Invalid input" << endl;
                     cin.clear();
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     break;
@@ -160,7 +160,7 @@ int main() {
             }
             case 7: {
                 if (g_seq == nullptr) {
-                    cout << "ERROR: Create sequence first!" << endl;
+                    cout << "ERROR: Create sequence first" << endl;
                     break;
                 }
                 int value, index;
@@ -188,13 +188,13 @@ int main() {
             }
             case 8: {
                 if (g_seq == nullptr) {
-                    cout << "ERROR: Create sequence first!" << endl;
+                    cout << "ERROR: Create sequence first" << endl;
                     break;
                 }
                 int index;
                 cout << "Enter index: ";
                 if (!(cin >> index)) {
-                    cout << "ERROR: Invalid input!" << endl;
+                    cout << "ERROR: Invalid input" << endl;
                     cin.clear();
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     break;
@@ -209,7 +209,7 @@ int main() {
             }
             case 9: {
                 if (g_seq == nullptr) {
-                    cout << "ERROR: Create sequence first!" << endl;
+                    cout << "ERROR: Create sequence first" << endl;
                     break;
                 }
                 try {
@@ -222,20 +222,20 @@ int main() {
             }
             case 10: {
                 if (g_seq == nullptr) {
-                    cout << "ERROR: Create sequence first!" << endl;
+                    cout << "ERROR: Create sequence first" << endl;
                     break;
                 }
                 int startIndex, endIndex;
                 cout << "Enter start index: ";
                 if (!(cin >> startIndex)) {
-                    cout << "ERROR: Invalid input!" << endl;
+                    cout << "ERROR: Invalid input" << endl;
                     cin.clear();
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     break;
                 }
                 cout << "Enter end index: ";
                 if (!(cin >> endIndex)) {
-                    cout << "ERROR: Invalid input!" << endl;
+                    cout << "ERROR: Invalid input" << endl;
                     cin.clear();
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     break;
@@ -251,15 +251,14 @@ int main() {
             }
             case 11: {
                 if (g_seq == nullptr) {
-                    cout << "ERROR: Create sequence first!" << endl;
+                    cout << "ERROR: Create sequence first" << endl;
                     break;
                 }
-                cout << "Creating temporary sequence to concat..." << endl;
                 Sequence<int>* temp = new MutableArraySequence<int>();
                 int count;
                 cout << "How many elements to add? ";
                 if (!(cin >> count) || count < 0) {
-                    cout << "ERROR: Invalid input!" << endl;
+                    cout << "ERROR: Invalid input" << endl;
                     cin.clear();
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     delete temp;
@@ -269,7 +268,7 @@ int main() {
                     int value;
                     cout << "Element " << (i+1) << ": ";
                     if (!(cin >> value)) {
-                        cout << "ERROR: Invalid input!" << endl;
+                        cout << "ERROR: Invalid input" << endl;
                         cin.clear();
                         cin.ignore(numeric_limits<streamsize>::max(), '\n');
                         delete temp;
@@ -297,13 +296,13 @@ int main() {
             }
             case 12: {
                 if (g_seq == nullptr) {
-                    cout << "ERROR: Create sequence first!" << endl;
+                    cout << "ERROR: Create sequence first" << endl;
                     break;
                 }
                 int index;
                 cout << "Enter index: ";
                 if (!(cin >> index)) {
-                    cout << "ERROR: Invalid input!" << endl;
+                    cout << "ERROR: Invalid input" << endl;
                     cin.clear();
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     break;
@@ -311,7 +310,7 @@ int main() {
                 ResultInfo<int> result = g_seq->TryGet(index);
 
                 if (result.IsSuccess()) {
-                    cout << "OK: Success! seq[" << index << "] = " << result.GetValue() << endl;
+                    cout << "OK: Success seq[" << index << "] = " << result.GetValue() << endl;
                 } else {
                     cout << "ERROR: " << result.GetError() << endl;
                 }
@@ -319,7 +318,7 @@ int main() {
             }
             case 13: {
                 if (g_seq == nullptr) {
-                    cout << "ERROR: Create sequence first!" << endl;
+                    cout << "ERROR: Create sequence first" << endl;
                     break;
                 }
                 cout << "Sequence: " << *g_seq << endl;
@@ -351,7 +350,7 @@ int main() {
             }
             case 17: {
                 if (g_bitseq == nullptr) {
-                    cout << "ERROR: Create BitSequence first (menu option 16)!" << endl;
+                    cout << "ERROR: Create BitSequence first" << endl;
                     break;
                 }
                 int bit;
@@ -371,7 +370,7 @@ int main() {
             }
             case 18: {
                 if (g_bitseq == nullptr) {
-                    cout << "ERROR: Create BitSequence first (menu option 16)!" << endl;
+                    cout << "ERROR: Create BitSequence first" << endl;
                     break;
                 }
                 print_bitsequence(g_bitseq);
@@ -379,7 +378,7 @@ int main() {
             }
             case 19: {
                 if (g_bitseq == nullptr) {
-                    cout << "ERROR: Create BitSequence first (menu option 16)!" << endl;
+                    cout << "ERROR: Create BitSequence first" << endl;
                     break;
                 }
                 cout << "Enter bits for second BitSequence (same length=" << g_bitseq->GetLength() << "):" << endl;
@@ -414,7 +413,7 @@ int main() {
             }
             case 20: {
                 if (g_bitseq == nullptr) {
-                    cout << "ERROR: Create BitSequence first (menu option 16)!" << endl;
+                    cout << "ERROR: Create BitSequence first (menu option 16)" << endl;
                     break;
                 }
                 cout << "Enter bits for second BitSequence (same length=" << g_bitseq->GetLength() << "):" << endl;
@@ -484,7 +483,7 @@ int main() {
             }
             case 22: {
                 if (g_bitseq == nullptr) {
-                    cout << "ERROR: Create BitSequence first (menu option 16)!" << endl;
+                    cout << "ERROR: Create BitSequence first" << endl;
                     break;
                 }
                 BitSequence* result = g_bitseq->BitwiseNot();
@@ -496,7 +495,7 @@ int main() {
                 break;
             }
             default:
-                cout << "ERROR: Invalid choice! Please choose 0-22." << endl;
+                cout << "ERROR: Invalid choice! Please choose 0-22" << endl;
         }
     }
 
