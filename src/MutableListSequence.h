@@ -6,62 +6,23 @@
 //изменяемая последовательность на базе списка
 template <class T>
 class MutableListSequence : public ListSequenceBase<T> {
+protected:
+    Sequence<T>* instance() override {
+        return this;
+    }
+
+    ListSequenceBase<T>* CreateNew() const override {
+        return new MutableListSequence<T>();
+    }
+
 public:
     //конструкторы
-
     //пустая последовательность
     MutableListSequence() : ListSequenceBase<T>() {}
     //создать из массива
     MutableListSequence(T* items, int count) : ListSequenceBase<T>(items, count) {}
     //копирующий конструктор
     MutableListSequence(const MutableListSequence<T>& other) : ListSequenceBase<T>(other) {}
-    //создать копию
-    ListSequenceBase<T>* Clone() const override {
-        return new MutableListSequence<T>(*this);
-    }
-
-    //методы изменения
-    Sequence<T>* Append(T item) override {
-        this->items->Append(item);
-        return this;
-    }
-
-    Sequence<T>* Prepend(T item) override {
-        this->items->Prepend(item);
-        return this;
-    }
-
-    Sequence<T>* InsertAt(T item, int index) override {
-        this->items->InsertAt(item, index);
-        return this;
-    }
-
-    Sequence<T>* GetSubsequence(int startIndex, int endIndex) const override {
-        //получаем подсписок из LinkedList
-        LinkedList<T>* subList = this->items->GetSubList(startIndex, endIndex);
-
-        //создаём новую ListSequence на базе подсписка
-        MutableListSequence<T>* result = new MutableListSequence<T>();
-        delete result->items;  //удаляем пустой список
-        result->items = subList;//заменяем на подсписок
-        return result;
-    }
-
-    Sequence<T>* Concat(const Sequence<T>* other) const override {
-        //создаём новую последовательность
-        MutableListSequence<T>* result = new MutableListSequence<T>();
-
-        //копируем элементы из текущей последовательности
-        for (int i = 0; i < this->GetLength(); i++) {
-            result->Append(this->Get(i));
-        }
-        //копируем элементы из другой последовательности
-        for (int i = 0; i < other->GetLength(); i++) {
-            result->Append(other->Get(i));
-        }
-
-        return result;
-    }
 };
 
 #endif

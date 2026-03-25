@@ -152,6 +152,174 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+tests/run_all_tests.obj: tests/run_all_tests.cpp.obj
+.PHONY : tests/run_all_tests.obj
+
+# target to build an object file
+tests/run_all_tests.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/run_all_tests.cpp.obj
+.PHONY : tests/run_all_tests.cpp.obj
+
+tests/run_all_tests.i: tests/run_all_tests.cpp.i
+.PHONY : tests/run_all_tests.i
+
+# target to preprocess a source file
+tests/run_all_tests.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/run_all_tests.cpp.i
+.PHONY : tests/run_all_tests.cpp.i
+
+tests/run_all_tests.s: tests/run_all_tests.cpp.s
+.PHONY : tests/run_all_tests.s
+
+# target to generate assembly for a file
+tests/run_all_tests.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/run_all_tests.cpp.s
+.PHONY : tests/run_all_tests.cpp.s
+
+tests/test_bit_sequence.obj: tests/test_bit_sequence.cpp.obj
+.PHONY : tests/test_bit_sequence.obj
+
+# target to build an object file
+tests/test_bit_sequence.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_bit_sequence.cpp.obj
+.PHONY : tests/test_bit_sequence.cpp.obj
+
+tests/test_bit_sequence.i: tests/test_bit_sequence.cpp.i
+.PHONY : tests/test_bit_sequence.i
+
+# target to preprocess a source file
+tests/test_bit_sequence.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_bit_sequence.cpp.i
+.PHONY : tests/test_bit_sequence.cpp.i
+
+tests/test_bit_sequence.s: tests/test_bit_sequence.cpp.s
+.PHONY : tests/test_bit_sequence.s
+
+# target to generate assembly for a file
+tests/test_bit_sequence.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_bit_sequence.cpp.s
+.PHONY : tests/test_bit_sequence.cpp.s
+
+tests/test_dynamic_array.obj: tests/test_dynamic_array.cpp.obj
+.PHONY : tests/test_dynamic_array.obj
+
+# target to build an object file
+tests/test_dynamic_array.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_dynamic_array.cpp.obj
+.PHONY : tests/test_dynamic_array.cpp.obj
+
+tests/test_dynamic_array.i: tests/test_dynamic_array.cpp.i
+.PHONY : tests/test_dynamic_array.i
+
+# target to preprocess a source file
+tests/test_dynamic_array.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_dynamic_array.cpp.i
+.PHONY : tests/test_dynamic_array.cpp.i
+
+tests/test_dynamic_array.s: tests/test_dynamic_array.cpp.s
+.PHONY : tests/test_dynamic_array.s
+
+# target to generate assembly for a file
+tests/test_dynamic_array.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_dynamic_array.cpp.s
+.PHONY : tests/test_dynamic_array.cpp.s
+
+tests/test_linked_list.obj: tests/test_linked_list.cpp.obj
+.PHONY : tests/test_linked_list.obj
+
+# target to build an object file
+tests/test_linked_list.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_linked_list.cpp.obj
+.PHONY : tests/test_linked_list.cpp.obj
+
+tests/test_linked_list.i: tests/test_linked_list.cpp.i
+.PHONY : tests/test_linked_list.i
+
+# target to preprocess a source file
+tests/test_linked_list.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_linked_list.cpp.i
+.PHONY : tests/test_linked_list.cpp.i
+
+tests/test_linked_list.s: tests/test_linked_list.cpp.s
+.PHONY : tests/test_linked_list.s
+
+# target to generate assembly for a file
+tests/test_linked_list.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_linked_list.cpp.s
+.PHONY : tests/test_linked_list.cpp.s
+
+tests/test_matrix.obj: tests/test_matrix.cpp.obj
+.PHONY : tests/test_matrix.obj
+
+# target to build an object file
+tests/test_matrix.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_matrix.cpp.obj
+.PHONY : tests/test_matrix.cpp.obj
+
+tests/test_matrix.i: tests/test_matrix.cpp.i
+.PHONY : tests/test_matrix.i
+
+# target to preprocess a source file
+tests/test_matrix.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_matrix.cpp.i
+.PHONY : tests/test_matrix.cpp.i
+
+tests/test_matrix.s: tests/test_matrix.cpp.s
+.PHONY : tests/test_matrix.s
+
+# target to generate assembly for a file
+tests/test_matrix.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_matrix.cpp.s
+.PHONY : tests/test_matrix.cpp.s
+
+tests/test_mutable_array.obj: tests/test_mutable_array.cpp.obj
+.PHONY : tests/test_mutable_array.obj
+
+# target to build an object file
+tests/test_mutable_array.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_mutable_array.cpp.obj
+.PHONY : tests/test_mutable_array.cpp.obj
+
+tests/test_mutable_array.i: tests/test_mutable_array.cpp.i
+.PHONY : tests/test_mutable_array.i
+
+# target to preprocess a source file
+tests/test_mutable_array.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_mutable_array.cpp.i
+.PHONY : tests/test_mutable_array.cpp.i
+
+tests/test_mutable_array.s: tests/test_mutable_array.cpp.s
+.PHONY : tests/test_mutable_array.s
+
+# target to generate assembly for a file
+tests/test_mutable_array.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_mutable_array.cpp.s
+.PHONY : tests/test_mutable_array.cpp.s
+
+tests/test_mutable_list.obj: tests/test_mutable_list.cpp.obj
+.PHONY : tests/test_mutable_list.obj
+
+# target to build an object file
+tests/test_mutable_list.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_mutable_list.cpp.obj
+.PHONY : tests/test_mutable_list.cpp.obj
+
+tests/test_mutable_list.i: tests/test_mutable_list.cpp.i
+.PHONY : tests/test_mutable_list.i
+
+# target to preprocess a source file
+tests/test_mutable_list.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_mutable_list.cpp.i
+.PHONY : tests/test_mutable_list.cpp.i
+
+tests/test_mutable_list.s: tests/test_mutable_list.cpp.s
+.PHONY : tests/test_mutable_list.s
+
+# target to generate assembly for a file
+tests/test_mutable_list.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_mutable_list.cpp.s
+.PHONY : tests/test_mutable_list.cpp.s
+
 tests/test_operators.obj: tests/test_operators.cpp.obj
 .PHONY : tests/test_operators.obj
 
@@ -176,6 +344,54 @@ tests/test_operators.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_operators.cpp.s
 .PHONY : tests/test_operators.cpp.s
 
+tests/test_result_info.obj: tests/test_result_info.cpp.obj
+.PHONY : tests/test_result_info.obj
+
+# target to build an object file
+tests/test_result_info.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_result_info.cpp.obj
+.PHONY : tests/test_result_info.cpp.obj
+
+tests/test_result_info.i: tests/test_result_info.cpp.i
+.PHONY : tests/test_result_info.i
+
+# target to preprocess a source file
+tests/test_result_info.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_result_info.cpp.i
+.PHONY : tests/test_result_info.cpp.i
+
+tests/test_result_info.s: tests/test_result_info.cpp.s
+.PHONY : tests/test_result_info.s
+
+# target to generate assembly for a file
+tests/test_result_info.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_result_info.cpp.s
+.PHONY : tests/test_result_info.cpp.s
+
+tests/test_utils.obj: tests/test_utils.cpp.obj
+.PHONY : tests/test_utils.obj
+
+# target to build an object file
+tests/test_utils.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_utils.cpp.obj
+.PHONY : tests/test_utils.cpp.obj
+
+tests/test_utils.i: tests/test_utils.cpp.i
+.PHONY : tests/test_utils.i
+
+# target to preprocess a source file
+tests/test_utils.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_utils.cpp.i
+.PHONY : tests/test_utils.cpp.i
+
+tests/test_utils.s: tests/test_utils.cpp.s
+.PHONY : tests/test_utils.s
+
+# target to generate assembly for a file
+tests/test_utils.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab2.dir\build.make CMakeFiles/lab2.dir/tests/test_utils.cpp.s
+.PHONY : tests/test_utils.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -188,9 +404,36 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... tests/run_all_tests.obj
+	@echo ... tests/run_all_tests.i
+	@echo ... tests/run_all_tests.s
+	@echo ... tests/test_bit_sequence.obj
+	@echo ... tests/test_bit_sequence.i
+	@echo ... tests/test_bit_sequence.s
+	@echo ... tests/test_dynamic_array.obj
+	@echo ... tests/test_dynamic_array.i
+	@echo ... tests/test_dynamic_array.s
+	@echo ... tests/test_linked_list.obj
+	@echo ... tests/test_linked_list.i
+	@echo ... tests/test_linked_list.s
+	@echo ... tests/test_matrix.obj
+	@echo ... tests/test_matrix.i
+	@echo ... tests/test_matrix.s
+	@echo ... tests/test_mutable_array.obj
+	@echo ... tests/test_mutable_array.i
+	@echo ... tests/test_mutable_array.s
+	@echo ... tests/test_mutable_list.obj
+	@echo ... tests/test_mutable_list.i
+	@echo ... tests/test_mutable_list.s
 	@echo ... tests/test_operators.obj
 	@echo ... tests/test_operators.i
 	@echo ... tests/test_operators.s
+	@echo ... tests/test_result_info.obj
+	@echo ... tests/test_result_info.i
+	@echo ... tests/test_result_info.s
+	@echo ... tests/test_utils.obj
+	@echo ... tests/test_utils.i
+	@echo ... tests/test_utils.s
 .PHONY : help
 
 

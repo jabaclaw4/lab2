@@ -8,9 +8,9 @@ void check(bool condition, const char* test_name) {
     total++;
     if (condition) {
         passed++;
-        std::cout << "✓ " << test_name << std::endl;
+        std::cout << "+ " << test_name << std::endl;
     } else {
-        std::cout << "✗ " << test_name << " FAILED" << std::endl;
+        std::cout << "- " << test_name << " FAILED" << std::endl;
     }
 }
 
