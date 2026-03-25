@@ -1,15 +1,16 @@
 # ninja log v6
 60	1007	7958897812667871	CMakeFiles/lab2.dir/tests/test_operators.cpp.obj	86093e79e805ad97
 41	938	7958893668375224	CMakeFiles/lab2.dir/main.cpp.obj	a06e6df6f43f0759
-50	863	7958898771949086	build.ninja	90ca5052432c5a33
+36	524	7959041731617288	build.ninja	90ca5052432c5a33
 49	625	7958885428322302	CMakeFiles/lab2.dir/tests/run_all_tests.cpp.obj	d160793a590265a
 106	998	7958897813129419	CMakeFiles/lab2.dir/tests/test_result_info.cpp.obj	b654e6741fa639ff
 73	842	7958897812793783	CMakeFiles/lab2.dir/tests/test_dynamic_array.cpp.obj	67fd77e67fda5e35
-939	1131	7958893677349260	lab2.exe	53af253b22d992fe
+591	809	7958898779424088	lab2.exe	500233b8a11dff39
 80	877	7958897812868977	CMakeFiles/lab2.dir/tests/test_linked_list.cpp.obj	4eea4f96aa0e6a0d
 88	968	7958897812946450	CMakeFiles/lab2.dir/tests/test_mutable_array.cpp.obj	da7adbebcde76e02
 115	978	7958897813216335	CMakeFiles/lab2.dir/tests/test_bit_sequence.cpp.obj	ff4d93d6942f423f
 98	1034	7958897813043143	CMakeFiles/lab2.dir/tests/test_mutable_list.cpp.obj	96e3cc5b68707261
-36	524	7958898771949086	build.ninja	90ca5052432c5a33
 38	590	7958898773901317	CMakeFiles/lab2.dir/tests/test_utils.cpp.obj	9f0fa985e0359380
-591	809	7958898779424088	lab2.exe	500233b8a11dff39
+33	411	7959051623519972	CMakeFiles/lab2.dir/tests/run_all_tests.cpp.obj	d160793a590265a
+27	531	7959051623468732	CMakeFiles/lab2.dir/main.cpp.obj	a06e6df6f43f0759
+531	913	7959051628498167	lab2.exe	500233b8a11dff39
